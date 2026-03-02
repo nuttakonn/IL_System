@@ -1,0 +1,66 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SignOnMasterPage.master.cs" Inherits="DesktopService_MasterSite_SignOnMasterPage" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1" runat="server">
+    <title>EasyBuy Web Application Portal [connect iSeries]</title>
+    <link href="../../Css/_Styles.css" rel="stylesheet" type="text/css" />
+    <script language="JavaScript" type="text/JavaScript">        javascript: window.history.forward(-1); </script>
+    <style type="text/css">
+
+        .style2
+        {
+            width: 80%;
+        }
+        .style3
+        {
+            height: 26px;
+        }
+        .style1
+        {
+            width: 22px;
+            height: 22px;
+            }
+        </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="header" style="height:70px">
+                
+                <table width=100%
+                        
+                    
+                style="background-image: url('http://localhost:1401/ChangeCustomerData/Images/banner-6-70-1.jpg'); height: 70px; background-repeat: no-repeat;">
+                    <tr>
+                        <td class="style2">
+                            </td>
+                        <td style="width: 20%" valign="top">
+                            <table style="width: 100%" align="right">
+                                <tr>
+                                    <td class="style3">
+                                        &nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right">
+                                        <asp:Label ID="lblUser" runat="Server" Font-Bold="True" ForeColor="Black" 
+                                            Text='<%((UserInfo)Session["UserInfo"]).Username %>'></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" class="style1">
+                                        &nbsp;</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+    </div >
+        <div>
+            <asp:ContentPlaceHolder ID="MainDesktopContent"  runat="server">
+                
+                </asp:ContentPlaceHolder>
+        </div>
+    
+    </form>
+</body>
+</html>
