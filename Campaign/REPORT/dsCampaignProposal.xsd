@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet" targetNamespace="http://tempuri.org/DataSet.xsd" xmlns:mstns="http://tempuri.org/DataSet.xsd" xmlns="http://tempuri.org/DataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dtNoteList">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="C11CMP" type="xs:string" minOccurs="0" />
+              <xs:element name="C11UDT" type="xs:string" minOccurs="0" />
+              <xs:element name="C11UTM" type="xs:string" minOccurs="0" />
+              <xs:element name="C11NOT" type="xs:string" minOccurs="0" />
+              <xs:element name="C11NSQ" type="xs:string" minOccurs="0" />
+              <xs:element name="C11LSQ" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dtVendorList">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="C08VEN1" type="xs:string" minOccurs="0" />
+              <xs:element name="P10NAM" type="xs:string" minOccurs="0" />
+              <xs:element name="P16RNK" type="xs:string" minOccurs="0" />
+              <xs:element name="P12WOR" type="xs:string" minOccurs="0" />
+              <xs:element name="P12ODR" type="xs:string" minOccurs="0" />
+              <xs:element name="P10EDT" type="xs:string" minOccurs="0" />
+              <xs:element name="C81END" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dtCampaignList">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="C02CMP" type="xs:string" minOccurs="0" />
+              <xs:element name="C02CSQ" type="xs:string" minOccurs="0" />
+              <xs:element name="C02RSQ" type="xs:string" minOccurs="0" />
+              <xs:element name="C02INR" type="xs:string" minOccurs="0" />
+              <xs:element name="C02CRR" type="xs:string" minOccurs="0" />
+              <xs:element name="C02IFN" type="xs:string" minOccurs="0" />
+              <xs:element name="C02FMT" type="xs:string" minOccurs="0" />
+              <xs:element name="C02TOT" type="xs:string" minOccurs="0" />
+              <xs:element name="C02INS" type="xs:string" minOccurs="0" />
+              <xs:element name="C07CMP" type="xs:string" minOccurs="0" />
+              <xs:element name="C07CSQ" type="xs:string" minOccurs="0" />
+              <xs:element name="C07PIT" type="xs:string" minOccurs="0" />
+              <xs:element name="C07MIN" type="xs:string" minOccurs="0" />
+              <xs:element name="C07MAX" type="xs:string" minOccurs="0" />
+              <xs:element name="T44LTY" type="xs:string" minOccurs="0" />
+              <xs:element name="T44ITM" type="xs:string" minOccurs="0" />
+              <xs:element name="T44ITM1" type="xs:string" minOccurs="0" />
+              <xs:element name="T44TYP" type="xs:string" minOccurs="0" />
+              <xs:element name="T44BRD" type="xs:string" minOccurs="0" />
+              <xs:element name="T44COD" type="xs:string" minOccurs="0" />
+              <xs:element name="T44MDL" type="xs:string" minOccurs="0" />
+              <xs:element name="T42DES" type="xs:string" minOccurs="0" />
+              <xs:element name="T41DES" type="xs:string" minOccurs="0" />
+              <xs:element name="T43DES" type="xs:string" minOccurs="0" />
+              <xs:element name="T44DES" type="xs:string" minOccurs="0" />
+              <xs:element name="ROW" type="xs:string" minOccurs="0" />
+              <xs:element name="RANGE" type="xs:string" minOccurs="0" />
+              <xs:element name="MIN_SEQ" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dtDataList">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="C01SDT" type="xs:string" minOccurs="0" />
+              <xs:element name="C01EDT" type="xs:string" minOccurs="0" />
+              <xs:element name="C01CAD" type="xs:string" minOccurs="0" />
+              <xs:element name="C01CLD" type="xs:string" minOccurs="0" />
+              <xs:element name="C01STY" type="xs:string" minOccurs="0" />
+              <xs:element name="C01CMP" type="xs:string" minOccurs="0" />
+              <xs:element name="C01CNM" type="xs:string" minOccurs="0" />
+              <xs:element name="C01SRT" type="xs:string" minOccurs="0" />
+              <xs:element name="T46ENM" type="xs:string" minOccurs="0" />
+              <xs:element name="C01RNG" type="xs:string" minOccurs="0" />
+              <xs:element name="C01LTY" type="xs:string" minOccurs="0" />
+              <xs:element name="USER_LOGIN" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
