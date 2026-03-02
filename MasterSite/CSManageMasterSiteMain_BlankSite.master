@@ -1,0 +1,40 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="CSManageMasterSiteMain_BlankSite.Master.cs" Inherits="CSManageMasterSiteMain_BlankSite" %>
+<%@ Register Src="~/ManageData/Menu/CSManageMenu.ascx" TagName="CSManageMenu" TagPrefix="uc1" %>
+<%@ Register Src="~/UserControls/Toolsbar/TalentToolsbar.ascx" TagName="TalentToolsbar" TagPrefix="uc2" %>
+<%@ Register Src="~/UserControls/BreadCrumb/BreadCrumb.ascx" TagName="BreadCrumbs" TagPrefix="uc3" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="head1" runat="server">
+    <title>CS Data Manage System</title>
+ <%--   <link href="../../Css/_Styles.css" rel="Stylesheet" type="text/css" />--%>
+    <script type="text/javascript" src="../../Js/utility.js"></script>
+    <script language="JavaScript" type="text/JavaScript">        javascript: window.history.forward(-1); </script>
+    
+  
+    </head>
+<body runat="server">
+    <form runat="server" >
+    
+    <ajaxtoolkit:toolkitscriptmanager runat="server" EnablePartialRendering="true" 
+    EnableScriptLocalization="true" EnableScriptGlobalization="true"  
+        ID="ScriptManager1" AsyncPostBackTimeout="36000" />
+    
+            <table width="100%" >
+                <tr>
+                    <td align="center" style="width:100%; height:100% ">
+                        <!-- <div style="height:500;overflow:-moz-scrollbars-vertical;overflow-x:hidden;overflow-y:scroll; "> -->
+                        <!--<div style="vertical-align:top; overflow:-moz-scrollbars-vertical; height:460px; width:98%; overflow-y:auto; overflow-x:hidden;"> -->
+                        <asp:ContentPlaceHolder ID="phContents" runat="server">
+                        </asp:ContentPlaceHolder>
+                        <!--</div>    -->
+                    </td>
+                </tr>             
+           </table> 
+     
+    
+    </form>
+</body>
+
+</html>
+

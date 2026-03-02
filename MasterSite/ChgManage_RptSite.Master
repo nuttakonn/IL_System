@@ -1,0 +1,61 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ChgManage_RptSite.master.cs" Inherits="ChgManage_RptSite" %>
+<%@ Register Src="~/ManageData/Menu/CSManageMenu.ascx" TagName="CSManageMenu" TagPrefix="uc1" %>
+<%@ Register Src="~/UserControls/BreadCrumb/BreadCrumb.ascx" TagName="BreadCrumbs" TagPrefix="uc3" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="head1" runat="server">
+    <title>CS Data Manage System</title>
+    <link href="../../Css/_Styles.css" rel="Stylesheet" type="text/css" />
+    <script type="text/javascript" src="../../Js/utility.js"></script>
+    
+</head>
+<body id="body" runat="server" scroll="no">
+    <form id="form1" runat="server" >
+    <script type="text/javascript">
+ 
+    }
+    </script>
+    <ajaxtoolkit:toolkitscriptmanager runat="server" EnablePartialRendering="true" 
+        ID="ScriptManager1" AsyncPostBackTimeout="36000" />
+    
+    
+
+                                       
+                    
+   
+            
+            <table width="100%" bgcolor="#F1F1EA" border="0" cellpadding="1" frame="border" style="border: 1px outset #C0C0C0;">
+                <tr >
+                    <td style="width:400px"><uc3:BreadCrumbs ID="BreadCrumbs1" runat="server" />
+                    </td>
+                    <td  align="right" > 
+                                        
+                        
+                    </td>
+                </tr>
+                <tr valign =top>
+                    <td style=" height:430px; width:1020px; " colspan="2" align="center">                        
+                    <!-- ; width:100%;<div style="height:500;overflow:-moz-scrollbars-vertical;overflow-x:hidden;overflow-y:scroll; "> 
+                    -->
+                    <div style="vertical-align:top; height:430px; width:100%; margin-left:0; margin-top:0; overflow-y:scroll; overflow-x:scroll;">
+                            <asp:ContentPlaceHolder id="phContents"  runat="server" >
+                                
+                            </asp:ContentPlaceHolder> 
+                    </div> 
+                        <div style="clip: rect(auto, auto, auto, auto); text-align: center; font-size: small;">
+                            <span id="Span1" title="© 2008  EasyBuy Public Company Limited. All rights reserved.">&copy;2012 EASY BUY Public Company Limited. All rights reserved.</span><a href="#header">Go top</a>                            
+                       </div>                        
+                                    
+                    </td>
+                </tr>             
+            </table>
+
+        
+    </div>       
+                                                         
+    
+    </form>
+</body>
+
+</html>
