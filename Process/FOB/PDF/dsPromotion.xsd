@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsPromotion" targetNamespace="http://tempuri.org/dsPromotion.xsd" xmlns:mstns="http://tempuri.org/dsPromotion.xsd" xmlns="http://tempuri.org/dsPromotion.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsPromotion" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsPromotion" msprop:Generator_UserDSName="dsPromotion">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dtPromotion" msprop:Generator_TableClassName="dtPromotionDataTable" msprop:Generator_TableVarName="tabledtPromotion" msprop:Generator_TablePropName="dtPromotion" msprop:Generator_RowDeletingName="dtPromotionRowDeleting" msprop:Generator_RowChangingName="dtPromotionRowChanging" msprop:Generator_RowEvHandlerName="dtPromotionRowChangeEventHandler" msprop:Generator_RowDeletedName="dtPromotionRowDeleted" msprop:Generator_UserTableName="dtPromotion" msprop:Generator_RowChangedName="dtPromotionRowChanged" msprop:Generator_RowEvArgName="dtPromotionRowChangeEvent" msprop:Generator_RowClassName="dtPromotionRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="brand" msprop:Generator_ColumnVarNameInTable="columnbrand" msprop:Generator_ColumnPropNameInRow="brand" msprop:Generator_ColumnPropNameInTable="brandColumn" msprop:Generator_UserColumnName="brand" type="xs:string" minOccurs="0" />
+              <xs:element name="product" msprop:Generator_ColumnVarNameInTable="columnproduct" msprop:Generator_ColumnPropNameInRow="product" msprop:Generator_ColumnPropNameInTable="productColumn" msprop:Generator_UserColumnName="product" type="xs:string" minOccurs="0" />
+              <xs:element name="model" msprop:Generator_ColumnVarNameInTable="columnmodel" msprop:Generator_ColumnPropNameInRow="model" msprop:Generator_ColumnPropNameInTable="modelColumn" msprop:Generator_UserColumnName="model" type="xs:string" minOccurs="0" />
+              <xs:element name="proitem" msprop:Generator_ColumnVarNameInTable="columnproitem" msprop:Generator_ColumnPropNameInRow="proitem" msprop:Generator_ColumnPropNameInTable="proitemColumn" msprop:Generator_UserColumnName="proitem" type="xs:string" minOccurs="0" />
+              <xs:element name="price" msprop:Generator_ColumnVarNameInTable="columnprice" msprop:Generator_ColumnPropNameInRow="price" msprop:Generator_ColumnPropNameInTable="priceColumn" msprop:Generator_UserColumnName="price" type="xs:decimal" minOccurs="0" />
+              <xs:element name="int" msprop:Generator_ColumnVarNameInTable="columnint" msprop:Generator_ColumnPropNameInRow="_int" msprop:Generator_ColumnPropNameInTable="intColumn" msprop:Generator_UserColumnName="int" type="xs:decimal" minOccurs="0" />
+              <xs:element name="cru" msprop:Generator_ColumnVarNameInTable="columncru" msprop:Generator_ColumnPropNameInRow="cru" msprop:Generator_ColumnPropNameInTable="cruColumn" msprop:Generator_UserColumnName="cru" type="xs:decimal" minOccurs="0" />
+              <xs:element name="minperiod" msprop:Generator_ColumnVarNameInTable="columnminperiod" msprop:Generator_ColumnPropNameInRow="minperiod" msprop:Generator_ColumnPropNameInTable="minperiodColumn" msprop:Generator_UserColumnName="minperiod" type="xs:decimal" minOccurs="0" />
+              <xs:element name="maxperiod" msprop:Generator_ColumnVarNameInTable="columnmaxperiod" msprop:Generator_ColumnPropNameInRow="maxperiod" msprop:Generator_ColumnPropNameInTable="maxperiodColumn" msprop:Generator_UserColumnName="maxperiod" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
