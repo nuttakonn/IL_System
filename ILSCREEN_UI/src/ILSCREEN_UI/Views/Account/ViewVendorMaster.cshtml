@@ -1,0 +1,583 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "View Vendor Master";
+}
+
+<style>
+    span.input-group-text {
+        border-radius: 0.375rem 0 0 0.375rem !important;
+        color: #fff;
+        background-color: #f124ab;
+    }
+
+    input.textbox, select.textbox {
+        border: 1px solid #dee2e6;
+        border-radius: 0.375rem;
+        font-weight: 400;
+        line-height: 1.5;
+        padding: 0.375rem 0.75rem;
+    }
+</style>
+
+<!--begin::Row-->
+<div class="row">
+    <div class="col-sm-6"><h3 class="mb-0">@ViewData["Title"]</h3></div>
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-end">
+            @* <li class="breadcrumb-item"><a href="#">@ViewData["ControllerName"]</a></li> *@
+            <li class="breadcrumb-item"><a href="@("../" + ServerInfoModel.ControllerName)">@ServerInfoModel.ControllerName</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+        </ol>
+    </div>
+
+
+</div>
+<!--end::Row-->
+<!--begin::Row-->
+<div class="row g-4">
+    <!--begin::Col-->
+    <div class="col-12">
+        <!--begin::Quick Example-->
+        <div class="card card-secondary card-outline mb-4">
+            <!--begin::Header-->
+            <div class="card-header"><div class="card-title">@ViewData["Title"]</div></div>
+            <!--end::Header-->
+            <!--begin::Form-->
+            <form>
+                <!--begin::Body-->
+                <div class="card-body">
+                    <div class="row mb-2 align-items-center">
+                        <label for="SelectSearchBy" class="form-label col-sm-2 text-end">Search by:</label>
+                        <div class="col-sm-3">
+                            <select class="form-select" id="SelectSearchBy">
+                                <option value="VN">Vendor Name</option>
+                                <option value="VC">Vendor Code</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-3">
+                            @* <select class="form-select" id="SelectSearchBy">
+                                <option>010103520029 : THE MALL GROUP CO.,LTD. (BRANCH NO.00004) [BRANCH NO.00004]</option>
+                            </select> *@
+                            <input type="text" class="form-control float-right" id="InputSearchValue">
+                            @* <div class="invalid-feedback">Please enter a value searching.</div> *@
+                            @* <span class="invalid-feedback" id="InputSearchValue-error">Please enter a value searching.</span> *@
+                        </div>
+
+                        <div class="col-sm-4">
+                            <button type="button" class="btn btn-primary" id="BtnSearch" onclick="GetViewVendorMaster()">Search</button>
+                            <button type="button" class="btn btn-secondary" id="BtnClear" onclick="ClearAll()">Clear</button>
+
+                        </div>
+                    </div>
+
+
+                    <br />
+                    <table id="tb_ViewVendorMaster" class="table table-bordered table-striped table-hover text-center">
+                        <thead>
+                            <tr class="table-info">
+                                <th scope="col">Select</th>
+                                <th scope="col">Seq.</th>
+                                <th scope="col">Vendor ID</th>
+                                <th scope="col">Vendor Name</th>
+                                <th scope="col">Head Office</th>
+                                <th scope="col">Vendor Type</th>
+                                <th scope="col">Vendor Date</th>
+                                <th scope="col">User</th>
+                                <th scope="col">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @* <tr>
+                                <th scope="row"><a href="#">Select</a></th>
+                                <td>010103520029</td>
+                                <td>THE MALL GROUP CO.,LTD. (BRANCH NO.00004) [BRANCH NO.00004]</td>
+                                <td>Y</td>
+                                <td>Media CLR</td>
+                                <td>MKBA2003</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><a href="#">Select</a></th>
+                                <td>010103520045</td>
+                                <td>THE MALL GROUP CO.,LTD. (BRANCH NO.00007) [BRANCH NO.00007]</td>
+                                <td>Y</td>
+                                <td>Media CLR</td>
+                                <td>MKBA2002</td>
+                                <td>1</td>
+                            </tr> *@
+                        </tbody>
+                    </table>
+
+                    <br />
+                    <div class="border border-black mb-2 mt-2 p-1">
+                        <div class="row m-2">
+                            <label for="" class="col-2 fw-bold text-end">Vendor ID : </label>
+                            <span class="col-2 text-primary" id="SpanVendorID"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Vendor Name TH : </label>
+                            <span class="col-2 text-primary" id="SpanVendorNameTH"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Vendor Name EN : </label>
+                            <span class="col-2 text-primary" id="SpanVendorNameEN"> </span>
+                        </div>
+                        <div class="row m-2">
+                            <label for="" class="col-2 fw-bold text-end">Title : </label>
+                            <span class="col-2 text-primary" id="SpanTitle"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Rank : </label>
+                            <span class="col-2 text-primary" id="SpanRank"> </span>
+                            <label for="" class="col-2 fw-bold text-end">% : </label>
+                            <span class="col-2 text-primary" id="SpanPercent"> </span>
+                        </div>
+                        <p class="fw-bold mb-2 mt-3 text-primary">** ที่อยู่จดทะเบียน</p>
+                        <div class="row m-2">
+                            <label for="" class="col-2 fw-bold text-end">Address No : </label>
+                            <span class="col-2 text-primary" id="SpanAddressNo1"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Building Name : </label>
+                            <span class="col-2 text-primary" id="SpanBuildingName1"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Floor : </label>
+                            <span class="col-2 text-primary" id="SpanFloor1"> </span>
+                        </div>
+                        <div class="row m-2">
+                            <label for="" class="col-2 fw-bold text-end">Soi : </label>
+                            <span class="col-2 text-primary" id="SpanSoi1"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Road : </label>
+                            <span class="col-2 text-primary" id="SpanRoad1"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Moo : </label>
+                            <span class="col-2 text-primary" id="SpanMoo1"> </span>
+                        </div>
+                        <div class="row m-2">
+                            <label for="" class="col-2 fw-bold text-end">Tambol : </label>
+                            <span class="col-2 text-primary" id="SpanTambol1"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Amphur : </label>
+                            <span class="col-2 text-primary" id="SpanAmphur1"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Province : </label>
+                            <span class="col-2 text-primary" id="SpanProvince1"> </span>
+                        </div>
+                        <div class="row m-2">
+                            <label for="" class="col-2 fw-bold text-end">Postal Code : </label>
+                            <span class="col-2 text-primary" id="SpanPostalCode1"> </span>
+                        </div>
+                        <p class="fw-bold mb-2 mt-3 text-primary">** ที่อยู่สถานประกอบการ</p>
+                        <div class="row m-2">
+                            <label for="" class="col-2 fw-bold text-end">Address No : </label>
+                            <span class="col-2 text-primary" id="SpanAddressNo2"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Building Name : </label>
+                            <span class="col-2 text-primary" id="SpanBuildingName2"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Floor : </label>
+                            <span class="col-2 text-primary" id="SpanFloor2"> </span>
+                        </div>
+                        <div class="row m-2">
+                            <label for="" class="col-2 fw-bold text-end">Soi : </label>
+                            <span class="col-2 text-primary" id="SpanSoi2"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Road : </label>
+                            <span class="col-2 text-primary" id="SpanRoad2"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Moo : </label>
+                            <span class="col-2 text-primary" id="SpanMoo2"> </span>
+                        </div>
+                        <div class="row m-2">
+                            <label for="" class="col-2 fw-bold text-end">Tambol : </label>
+                            <span class="col-2 text-primary" id="SpanTambol2"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Amphur : </label>
+                            <span class="col-2 text-primary" id="SpanAmphur2"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Province : </label>
+                            <span class="col-2 text-primary" id="SpanProvince2"> </span>
+                        </div>
+                        <div class="row m-2">
+                            <label for="" class="col-2 fw-bold text-end">Postal Code : </label>
+                            <span class="col-2 text-primary" id="SpanPostalCode2"> </span>
+                        </div>
+                        <p class="fw-bold mb-2 mt-3 text-primary">** ที่อยู่ Tax Invoice</p>
+                        <div class="row m-2">
+                            <label for="" class="col-2 fw-bold text-end">Address : </label>
+                            <span class="col-6 text-primary" id="SpanAddressTaxInvoice"> </span>
+                        </div>
+                        <p class="fw-bold mb-2 mt-3 text-primary">** Informatiom</p>
+                        <div class="row m-2">
+                            <label for="" class="col-2 fw-bold text-end">Register ID : </label>
+                            <span class="col-2 text-primary" id="SpanRegisterID"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Tax ID : </label>
+                            <span class="col-2 text-primary" id="SpanTaxID"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Vat Rate : </label>
+                            <span class="col-2 text-primary" id="SpanVatRate"> </span>
+                        </div>
+                        <div class="row m-2">
+                            <label for="" class="col-2 fw-bold text-end">Telephone No1 :</label>
+                            <span class="col-2 text-primary" id="SpanTelephoneNo1"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Fax No1 :</label>
+                            <span class="col-2 text-primary" id="SpanFaxNo1"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Fax No1. Type :</label>
+                            <span class="col-2 text-primary" id="SpanFaxNoType1"> </span>
+                        </div>
+                        <div class="row m-2">
+                            <label for="" class="col-2 fw-bold text-end">Telephone No2 :</label>
+                            <span class="col-2 text-primary" id="SpanTelephoneNo2"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Fax No2 :</label>
+                            <span class="col-2 text-primary" id="SpanFaxNo1"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Fax No2. Type :</label>
+                            <span class="col-2 text-primary" id="SpanFaxNoType2"> </span>
+                        </div>
+                        <div class="row m-2">
+                            <label for="" class="col-2 fw-bold text-end">First Join Date :</label>
+                            <span class="col-2 text-primary" id="SpanFirstJoinDate"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Join Date :</label>
+                            <span class="col-2 text-primary" id="SpanJoinDate"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Expire Date :</label>
+                            <span class="col-2 text-primary" id="SpanExpireDate"> </span>
+                        </div>
+                        <div class="row m-2">
+                            <label for="" class="col-2 fw-bold text-end">MOU Date :</label>
+                            <span class="col-2 text-primary" id="SpanMOUDate"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Pay to vendor :</label>
+                            <span class="col-2 text-primary" id="SpanPayToVendor"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Branch :</label>
+                            <span class="col-2 text-primary" id="SpanBranch"> </span>
+                        </div>
+                        <div class="row m-2">
+                            <label for="" class="col-2 fw-bold text-end">Pay Type :</label>
+                            <span class="col-2 text-primary" id="SpanPayType"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Credit Days :</label>
+                            <span class="col-2 text-primary" id="SpanCreditDays"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Calendar :</label>
+                            <span class="col-2 text-primary" id="SpanCalendar"> </span>
+                        </div>
+                        <div class="row m-2">
+                            <label for="" class="col-2 fw-bold text-end">Delivery Method :</label>
+                            <span class="col-2 text-primary" id="SpanDeliveryMethod"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Head office (Y/N) :</label>
+                            <span class="col-2 text-primary" id="SpanHeadOffice"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Bank Code :</label>
+                            <span class="col-2 text-primary" id="SpanBankCode"> </span>
+                        </div>
+                        <div class="row m-2">
+                            <label for="" class="col-2 fw-bold text-end">Complete Doc. :</label>
+                            <span class="col-2 text-primary" id="SpanCompleteDoc"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Account Code :</label>
+                            <span class="col-2 text-primary" id="SpanAccountCode"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Bank Region :</label>
+                            <span class="col-2 text-primary" id="SpanBankRegion"> </span>
+                        </div>
+                        <div class="row m-2">
+                            <label for="" class="col-2 fw-bold text-end">MK Code :</label>
+                            <span class="col-2 text-primary" id="SpanMKCode"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Time Available :</label>
+                            <span class="col-2 text-primary" id="SpanTimeAvailable"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Tax Ref. Name :</label>
+                            <span class="col-2 text-primary" id="SpanTaxRefName"> </span>
+                        </div>
+                        <div class="row m-2">
+                            <label for="" class="col-2 fw-bold text-end">Payee Name :</label>
+                            <span class="col-2 text-primary" id="SpanPayeeName"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Commission Type :</label>
+                            <span class="col-2 text-primary" id="SpanCommissionType"> </span>
+                            <label for="" class="col-2 fw-bold text-end">Commission Pay Days :</label>
+                            <span class="col-2 text-primary" id="SpanCommissionPayDays"> </span>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Body-->
+                <!--begin::Footer-->
+                <div class="card-footer text-center" style="display: none;">
+                    <h2>Thank You.</h2>
+                </div>
+                <!--end::Footer-->
+            </form>
+            <!--end::Form-->
+        </div>
+        <!--end::Quick Example-->
+    </div>
+    <!--end::Col-->
+</div>
+<!--end::Row-->
+
+
+<script>
+
+    var tbData_ViewVendorMaster = null;
+    var resultDataSearch = null;
+    var txtSearchValue = $('#InputSearchValue');
+
+    function initial() {
+        tbData_ViewVendorMaster = $('#tb_ViewVendorMaster').DataTable({
+            "lengthChange": true,
+            responsive: true,
+            "pageLength": 20,
+            scrollX: true,
+            columns: [
+                {
+                    width: '50px',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                    render: function (data, type, row, meta) {
+                        // return '<a href="#" data-index="' + ++meta.row + '" onclick="SelectClick(' + --meta.row + ')">Select</a>';
+                        return '<span style="color: blue; text-decoration: underline; cursor: pointer;" onclick="SelectClick(' + meta.row + ')">Select</span>';
+                    }
+                },
+                {
+                    width: '40px',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                    render: function (data, type, row, meta) {
+                        return ++meta.row;
+                    }
+                },
+                {
+                    // data: 'vendorID',
+                    width: '100px',
+                    type: 'string',
+                    orderable: true,
+                    searchable: true,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    // data: 'vendorEname',
+                    width: '40%',
+                    target: [4],
+                    type: 'string',
+                    orderable: true,
+                    searchable: true,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    // data: 'headOffice',
+                    width: '100px',
+                    target: [46],
+                    type: 'string',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    // data: 'vendorType',
+                    width: '100px',
+                    target: [63],
+                    type: 'string',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    // data: 'vendorDate',
+                    width: '100px',
+                    target: [64],
+                    type: 'string',
+                    orderable: true,
+                    searchable: true,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    // data: 'userUpdate',
+                    width: '100px',
+                    target: [65],
+                    type: 'string',
+                    orderable: true,
+                    searchable: true,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    // data: 'updateDate',
+                    width: '140px',
+                    target: [66],
+                    type: 'string',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+            ]
+        });
+    }
+
+    async function GetViewVendorMaster() {
+        if (txtSearchValue.val() === '') {
+            txtSearchValue.addClass('is-invalid');
+            txtSearchValue.attr('placeholder', 'Please enter a value searching.');
+            return
+        }
+        txtSearchValue.removeClass('is-invalid');
+        txtSearchValue.attr('placeholder', '');
+        Clear();
+        $('td[colspan=9].dt-empty').html('<div class="spinner-border text-secondary" role="status"><span class="visually-hidden">Loading...</span></div>');
+
+        let searchBy = $('#SelectSearchBy').find(':selected').val();
+        let searchValue = $('#InputSearchValue').val();
+        resultDataSearch = await getData('/Account/GetViewVendorMaster?searchBy=' + searchBy + '&searchValue=' + searchValue);
+        if (resultDataSearch?.data?.length > 0) {
+            // const [vendorID, vendorEName] = resultDataSearch.data;
+            for (var i = 0; i < resultDataSearch?.data?.length; i++) {
+                 let select = `<a href="#" data-index="${i}">Select</a>`;
+                 // เพิ่ม row ใน DataTable
+                let row = tbData_ViewVendorMaster.row.add([
+                    select,
+                    i,
+                    resultDataSearch.data[i].vendorID,
+                    resultDataSearch.data[i].vendorEName,
+                    resultDataSearch.data[i].headOffice,
+                    resultDataSearch.data[i].vendorType,
+                    resultDataSearch.data[i].vendorDate,
+                    resultDataSearch.data[i].userUpdate,
+                    resultDataSearch.data[i].updateDate,
+                ]).draw(false);
+
+                // แนบข้อมูลเต็มของแถวใน DataTable โดยใช้ row().data()
+                let rowData = row.data();
+                rowData.full = resultDataSearch[i];  // เพิ่มข้อมูลเต็มของแถว
+                row.data(rowData);  // อัปเดตข้อมูลของแถวใน DataTable
+            }
+        }else{
+            $('td[colspan=9].dt-empty').html('<span>Data Not Found.</span>');
+        }
+    }
+
+    function ClearAll() {
+        txtSearchValue.val('');
+        Clear();
+    }
+
+    function Clear() {
+        // txtSearchValue.val('');
+        tbData_ViewVendorMaster.rows().remove();
+        tbData_ViewVendorMaster.clear();
+        tbData_ViewVendorMaster.draw(false);
+
+        $('#SpanVendorID').empty();
+        $('#SpanVendorNameTH').empty();
+        $('#SpanVendorNameEN').empty();
+        $('#SpanTitle').empty();
+        $('#SpanRank').empty();
+        $('#SpanPercent').empty();
+
+        $('#SpanAddressNo1').empty();
+        $('#SpanBuildingName1').empty();
+        $('#SpanFloor1').empty();
+        $('#SpanSoi1').empty();
+        $('#SpanRoad1').empty();
+        $('#SpanMoo1').empty();
+        $('#SpanTambol1').empty();
+        $('#SpanAmphur1').empty();
+        $('#SpanProvince1').empty();
+        $('#SpanPostalCode1').empty();
+
+        $('#SpanAddressNo2').empty();
+        $('#SpanBuildingName2').empty();
+        $('#SpanFloor2').empty();
+        $('#SpanSoi2').empty();
+        $('#SpanRoad2').empty();
+        $('#SpanMoo2').empty();
+        $('#SpanTambol2').empty();
+        $('#SpanAmphur2').empty();
+        $('#SpanProvince2').empty();
+        $('#SpanPostalCode2').empty();
+
+        $('#SpanAddressTaxInvoice').empty();
+
+        $('#SpanRegisterID').empty();
+        $('#SpanTaxID').empty();
+        $('#SpanVatRate').empty();
+        $('#SpanTelephoneNo1').empty();
+        $('#SpanFaxNo1').empty();
+        $('#SpanFaxNoType1').empty();
+        $('#SpanTelephoneNo2').empty();
+        $('#SpanFaxNo2').empty();
+        $('#SpanFaxNoType2').empty();
+        $('#SpanFirstJoinDate').empty();
+        $('#SpanJoinDate').empty();
+        $('#SpanExpireDate').empty();
+        $('#SpanMOUDate').empty();
+        $('#SpanPayToVendor').empty();
+        $('#SpanBranch').empty();
+        $('#SpanPayType').empty();
+        $('#SpanCreditDays').empty();
+        $('#SpanCalendar').empty();
+        $('#SpanDeliveryMethod').empty();
+        $('#SpanHeadOffice').empty();
+        $('#SpanBankCode').empty();
+        $('#SpanCompleteDoc').empty();
+        $('#SpanAccountCode').empty();
+        $('#SpanBankRegion').empty();
+        $('#SpanMKCode').empty();
+        $('#SpanTimeAvailable').empty();
+        $('#SpanTaxRefName').empty();
+        $('#SpanPayeeName').empty();
+        $('#SpanCommissionType').empty();
+        $('#SpanCommissionPayDays').empty();
+    }
+
+    function SelectClick(seq) {
+        $('#SpanVendorID').text(resultDataSearch.data[seq].vendorID);
+        $('#SpanVendorNameTH').text(resultDataSearch.data[seq].vendorTName);
+        $('#SpanVendorNameEN').text(resultDataSearch.data[seq].vendorEName);
+        $('#SpanTitle').text(resultDataSearch.data[seq].titleName);
+        $('#SpanRank').text(resultDataSearch.data[seq].rank);
+        $('#SpanPercent').text(resultDataSearch.data[seq].percent);
+
+        $('#SpanAddressNo1').text(resultDataSearch.data[seq].addressNo1);
+        $('#SpanBuildingName1').text(resultDataSearch.data[seq].buildName1);
+        $('#SpanFloor1').text(resultDataSearch.data[seq].floor1);
+        $('#SpanSoi1').text(resultDataSearch.data[seq].soi1);
+        $('#SpanRoad1').text(resultDataSearch.data[seq].road1);
+        $('#SpanMoo1').text(resultDataSearch.data[seq].moo1);
+        $('#SpanTambol1').text(resultDataSearch.data[seq].tambol1);
+        $('#SpanAmphur1').text(resultDataSearch.data[seq].amphur1);
+        $('#SpanProvince1').text(resultDataSearch.data[seq].province1);
+        $('#SpanPostalCode1').text(resultDataSearch.data[seq].postCode1);
+
+        $('#SpanAddressNo2').text(resultDataSearch.data[seq].addressNo2);
+        $('#SpanBuildingName2').text(resultDataSearch.data[seq].buildName2);
+        $('#SpanFloor2').text(resultDataSearch.data[seq].floor2);
+        $('#SpanSoi2').text(resultDataSearch.data[seq].soi2);
+        $('#SpanRoad2').text(resultDataSearch.data[seq].road2);
+        $('#SpanMoo2').text(resultDataSearch.data[seq].moo2);
+        $('#SpanTambol2').text(resultDataSearch.data[seq].tambol2);
+        $('#SpanAmphur2').text(resultDataSearch.data[seq].amphur2);
+        $('#SpanProvince2').text(resultDataSearch.data[seq].province2);
+        $('#SpanPostalCode2').text(resultDataSearch.data[seq].postCode2);
+
+        $('#SpanAddressTaxInvoice').text(resultDataSearch.data[seq].addTax);
+
+        $('#SpanRegisterID').text(resultDataSearch.data[seq].regisTax);
+        $('#SpanTaxID').text(resultDataSearch.data[seq].taxID);
+        $('#SpanVatRate').text(resultDataSearch.data[seq].vatRate);
+        $('#SpanTelephoneNo1').text(resultDataSearch.data[seq].telNo1);
+        $('#SpanFaxNo1').text(resultDataSearch.data[seq].faxNo1);
+        $('#SpanFaxNoType1').text(resultDataSearch.data[seq].faxNoType1);
+        $('#SpanTelephoneNo2').text(resultDataSearch.data[seq].telNo2);
+        $('#SpanFaxNo2').text(resultDataSearch.data[seq].faxNo2);
+        $('#SpanFaxNoType2').text(resultDataSearch.data[seq].faxNoType2);
+
+        $('#SpanFirstJoinDate').text(resultDataSearch.data[seq].firstJoin);
+        $('#SpanJoinDate').text(resultDataSearch.data[seq].joinDate);
+        $('#SpanExpireDate').text(resultDataSearch.data[seq].expireDate);
+        $('#SpanMOUDate').text(resultDataSearch.data[seq].mouDate);
+        $('#SpanPayToVendor').text(resultDataSearch.data[seq].payToVendor);
+        $('#SpanBranch').text(resultDataSearch.data[seq].branch);
+        $('#SpanPayType').text(resultDataSearch.data[seq].payType);
+        $('#SpanCreditDays').text(resultDataSearch.data[seq].creditDay);
+        $('#SpanCalendar').text(resultDataSearch.data[seq].calendar);
+        $('#SpanDeliveryMethod').text(resultDataSearch.data[seq].delivery);
+        $('#SpanHeadOffice').text(resultDataSearch.data[seq].headOffice);
+        $('#SpanBankCode').text(resultDataSearch.data[seq].bankCode);
+        $('#SpanCompleteDoc').text(resultDataSearch.data[seq].completeDoc);
+        $('#SpanAccountCode').text(resultDataSearch.data[seq].accountCode);
+        $('#SpanBankRegion').text(resultDataSearch.data[seq].bankRegion);
+        $('#SpanMKCode').text(resultDataSearch.data[seq].mkCode);
+        $('#SpanTimeAvailable').text(resultDataSearch.data[seq].timeAvailable);
+        $('#SpanTaxRefName').text(resultDataSearch.data[seq].taxRefName);
+        $('#SpanPayeeName').text(resultDataSearch.data[seq].payName);
+        $('#SpanCommissionType').text(resultDataSearch.data[seq].commissionType);
+        $('#SpanCommissionPayDays').text(resultDataSearch.data[seq].commissionPay);
+    }
+
+    $(document).ready(function() {
+        initial();
+
+        txtSearchValue.keyup(function(e) {
+            if ($(this).val().length > 0) {
+                txtSearchValue.removeClass('is-invalid');
+                txtSearchValue.attr('placeholder', '');
+            }
+            if (e.keyCode == 13) {
+                $('#BtnSearch').click();
+            }
+        });
+    });
+</script>

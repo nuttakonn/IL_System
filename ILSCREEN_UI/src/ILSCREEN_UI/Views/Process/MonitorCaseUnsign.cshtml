@@ -1,0 +1,446 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Monitor Case Unsign";
+    ViewData["Controller"] = ViewContext.RouteData.Values["controller"]?.ToString();
+}
+
+<style>
+
+    span.input-group-text {
+        border-radius: 0.375rem 0 0 0.375rem !important;
+        color: #fff;
+        background-color: #f124ab;
+    }
+</style>
+
+<!--begin::Row-->
+<div class="row">
+    <div class="col-sm-6"><h3 class="mb-0">@ViewData["Title"]</h3></div>
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-end">
+            @* <li class="breadcrumb-item"><a href="#">@ViewData["ControllerName"]</a></li> *@
+            <li class="breadcrumb-item"><a href="@("../" + ViewData["Controller"])">@ViewData["Controller"]</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+        </ol>
+    </div>
+</div>
+<!--end::Row-->
+<!--begin::Row-->
+<div class="card card-secondary card-outline mb-4">
+    <div class="card-header"><div class="card-title">@ViewData["Title"]</div></div>
+<!--end::Row-->
+    <div class="card-body">
+            <div class="col-lg-12">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <!-- Vendor Code label -->
+                        <label class="col-md-3 col-form-label text-end">Vendor Code:</label>
+
+                        <!-- Select dropdown -->
+                        <div class="col-md-6">
+                            <select id="sl_vendor" class="form-control form-select">
+                            </select>
+                        </div>
+
+                        <!-- Search Button -->
+                        <div class="col-md-3">
+                            <button id="btn_search" class="btn btn-primary" type="button" onclick="GetMonitorCaseUnsign()">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div class="card-body">
+        <table id="tb_result" class="table table-hover table-bordered table-striped text-center" style="visibility:hidden;">
+            <thead>
+                <tr class="table-info">
+                    <th>Select</th>
+                    <th>Contract No.</th>
+                    <th>Approve Date</th>
+                    <th>Name</th>
+                    <th>Cnt.Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-body">
+        <table id="tb_detail" class="table table-hover table-borderless table-primary">
+            <tbody>
+                <tr>
+                    <td>
+                        <div id="txt_name" class="fw-bold">ชื่อ-นามสกุล</div>
+                    </td>
+                    <td>
+                        <label id="lb_name" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_csn" class="fw-bold">CSN</div>
+                    </td>
+                    <td>
+                        <label id="lb_csn" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_idcard" class="fw-bold">ID No</div>
+                    </td>
+                    <td>
+                        <label id="lb_idcard" class="text-primary"></label>
+
+                    </td>
+                    <td>
+                        <div id="txt_appno" class="fw-bold">Application No.</div>
+                    </td>
+                    <td>
+                        <label id="lb_appno" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_cont" class="fw-bold">Cont No.</div>
+
+                    </td>
+                    <td>
+                        <label id="lb_cont" class="text-primary"></label>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="txt_status" class="fw-bold">Status</div>
+                    </td>
+                    <td>
+                        <label id="lb_status" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_vendor" class="fw-bold">Vendor</div>
+                    </td>
+                    <td colspan="3">
+                        <label id="lb_vendor" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_product" class="fw-bold">Product</div>
+                    </td>
+                    <td colspan="3">
+                        <label id="lb_product" class="text-primary"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="txt_appdate" class="fw-bold">Application Date</div>
+                    </td>
+                    <td>
+                        <label id="lb_appdate" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_approvedate" class="fw-bold">Approve Date</div>
+
+                    </td>
+                    <td colspan="3">
+                        <label id="lb_approvedate" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_apptype" class="fw-bold">App Type</div>
+                    </td>
+                    <td colspan="3">
+                        <label id="lb_apptype" class="text-primary"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="txt_keyin" class="fw-bold">Key-In Step 1 By</div>
+                    </td>
+                    <td>
+                        <label id="lb_keyin" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_intby" class="fw-bold">Int.Approve by</div>
+                    </td>
+                    <td colspan="3">
+                        <label id="lb_intby" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_kesby" class="fw-bold">Kes.Approve By</div>
+                    </td>
+                    <td colspan="3">
+                        <label id="lb_kesby" class="text-primary"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="txt_duty" class="fw-bold">Duty Stamp</div>
+                    </td>
+                    <td>
+                        <label id="lb_duty" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_1stdue" class="fw-bold">First Due Amt</div>
+                    </td>
+                    <td colspan="3">
+                        <label id="lb_1stdue" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_1stcust" class="fw-bold">First cust Due</div>
+                    </td>
+                    <td colspan="3">
+                        <label id="lb_1stcust" class="text-primary"></label>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td>
+                        <div id="txt_purchase" class="fw-bold">Purchase Amt</div>
+                    </td>
+                    <td>
+                        <label id="lb_purchase" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_down" class="fw-bold">Down Amt</div>
+
+                    </td>
+                    <td colspan="3">
+                        <label id="lb_down" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_principle" class="fw-bold">Principle Bal.</div>
+                    </td>
+                    <td colspan="3">
+                        <label id="lb_principle" class="text-primary"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="txt_received" class="fw-bold">Received Type</div>
+                    </td>
+                    <td colspan="9">
+                        <label id="lb_received" class="text-primary"></label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-body">
+        <Label id="lb_termrate" class="fw-bold fs-4 text-primary text-decoration-underline"> Description term and rate</Label>
+
+        <table id="tb_termrate" class="table table-hover table-bordered table-striped text-center" style="visibility:hidden;">
+            <thead>
+                <tr class="table-info">
+                    <th>From Term</th>
+                    <th>To Term</th>
+                    <th>Int%</th>
+                    <th>Int Amount</th>
+                    <th>Cru%</th>
+                    <th>Cru Amonth</th>
+                    <th>Init. Free</th>
+                    <th>Total Amonth</th>
+                    <th>Oth</th>
+                    <th>INSTALL</th>
+                    <th>CREDIT BUREAU</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <Label id="lb_installment" class="fw-bold fs-4 text-primary text-decoration-underline">Description Installment</Label>
+
+        <table id="tb_installment" class="table table-hover table-bordered table-striped text-center" style="visibility:hidden;">
+            <thead>
+                <tr class="table-info">
+                    <th>Term</th>
+                    <th>Begin</th>
+                    <th>Principal</th>
+                    <th>Installment</th>
+                    <th>Interest</th>
+                    <th>Cr. Usage</th>
+                    <th>INIT. FEE</th>
+                    <th>Pay Principal</th>
+                    <th>New Principal</th>
+                    <th>Income</th>
+                    <th>Closing Date</th>
+                    <th>Closing rebate</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+
+<script>
+
+    var dtResult = null;
+
+    $(document).ready(() => {
+        initPage();
+    });
+
+    async function initPage() {
+        await setDataTable();
+        await setOptionData();
+    }
+
+    async function ClearScreen(){
+        dtResult.rows().remove();
+        dtResult.clear();
+        dtResult.draw(false);
+        $('#lb_name').text('');
+        $('#lb_csn').text('');
+        $('#lb_idcard').text('');
+        $('#lb_appno').text('');
+        $('#lb_cont').text('');
+        $('#lb_status').text('');
+        $('#lb_vendor').text('');
+        $('#lb_product').text('');
+        $('#lb_appdate').text('');
+        $('#lb_approvedate').text('');
+        $('#lb_apptype').text('');
+        $('#lb_keyin').text('');
+        $('#lb_intby').text('');
+        $('#lb_kesby').text('');
+        $('#lb_duty').text('');
+        $('#lb_1stdue').text('');
+        $('#lb_1stcust').text('');
+        $('#lb_purchase').text('');
+        $('#lb_down').text('');
+        $('#lb_principle').text('');
+        $('#lb_received').text('');
+        $('#tb_result').css('visibility', 'hidden');
+        $('#tb_termrate').css('visibility', 'hidden');
+        $('#tb_installment').css('visibility', 'hidden');
+    }
+    async function setOptionData() {
+        ajax_internal('/Process/GetVendorListMonitorCaseUnsign', null, 'GET', (result) => {
+            if (result === undefined || result === null || result === '') {
+                alertError("Please contacting helpdesk because the system error");
+                return;
+            }
+            debugger
+            if (result.data.length > 0) {
+                var select = document.getElementById('sl_vendor');
+                for (var i = 0; i < result.data.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = result.data[i].p10VEN.trim();
+                    opt.innerHTML =  result.data[i].p10VEN.trim() + " : " +  result.data[i].p10NAM.trim();
+                    select.appendChild(opt);
+                }
+            }
+        })
+    }
+    async function setDataTable() {
+        dtResult = $('#tb_result').DataTable({
+            "responsive": false,
+            "lengthChange": true,
+            "deferRender": true,
+            "retrieve": false,
+            "paging": false,
+            "searching": false,
+            "ordering": false,
+            "info": false,
+            "language": {
+                "emptyTable": "Data not found"
+            },
+            "columnDefs": [
+                {
+                    "targets": [0,1,2,3,4],
+                    "className": "text-center",
+                    "render": function (data, type, row, meta) {
+                        return data;
+                    }
+                }
+            ]
+        });
+
+    }
+
+    async function GetMonitorCaseUnsign() {
+        ClearScreen();
+        let vendor = $('#sl_vendor').val();
+        $('td[colspan=9].dt-empty').html('<div class="spinner-border text-secondary" role="status"><span class="visually-hidden">Loading...</span></div>');
+
+        resultDataSearch = await getData('/Process/GetMonitorCaseUnsign?vendor=' + vendor);
+        if (resultDataSearch?.data?.length > 0) {
+            await RenderDataTableSearch(resultDataSearch.data)
+        }else{
+            $('td[colspan=9].dt-empty').html('<span>Data Not Found.</span>');
+            dtResult.draw(false);
+            $('#tb_result').css('visibility', 'visible');
+        }
+    }
+
+    async function RenderDataTableSearch(result) {
+        
+        dtResult.rows().remove();
+        dtResult.clear();
+        dtResult.draw(false);
+        if (result.length > 0) {
+            for (var i = 0; i < result.length; i++) {
+                let btn = `<button class="btn btn-link btn-view fw-bold" data-index="${i}">Select</button>`;
+                debugger
+                let row = dtResult.row.add([
+                    btn,
+                    result[i].contractNo.replace(/\.0+$/, ''),
+                    result[i].appDate,
+                    result[i].customerName,
+                    await LocaleString(result[i].cntAmount)
+                ]);
+
+                let rowData = row.data();
+                rowData.full = result[i];  
+                row.data(rowData);  
+            }
+
+            dtResult.draw(false);
+            $('#tb_result').css('visibility', 'visible');  
+        }
+    }
+    
+
+    $('#tb_result tbody').on('click', '.btn-view', async function () {
+        debugger
+        var tr = $(this).closest('tr');            
+        let row = dtResult.row(tr);                
+        let fullData = row.data().full;          
+        console.log(fullData);
+        $('#lb_name').text(fullData.customerName.trim());
+        $('#lb_csn').text(fullData.cisNumber.replace(/\.0+$/, '').trim());
+        $('#lb_idcard').text(fullData.idCard.trim());
+        $('#lb_appno').text(fullData.appno.replace(/\.0+$/, '').trim());
+        $('#lb_cont').text(fullData.contractNo.replace(/\.0+$/, '').trim());
+        if(fullData.p1LOCA == 250) 
+            $('#lb_status').text('UNSIGNED');
+        $('#lb_vendor').text(fullData.vendorCode.replace(/\.0+$/, '').trim() + ' : ' + fullData.vendorName.trim());
+        $('#lb_product').text(fullData.productName.trim());
+        $('#lb_appdate').text(fullData.contractDate.trim());
+        $('#lb_approvedate').text(fullData.appDate.trim());
+        if (fullData.applicationType.trim() == "01")
+        {
+            $('#lb_apptype').text('01 : สมัครแบบปกติ');
+        }else if (fullData.applicationType.trim() == "02")
+        {
+            $('#lb_apptype').text('02 : สมัครโดยใช้บัตร Easy buy');
+        }
+        $('#lb_keyin').text(fullData.keyINBy.trim());
+        $('#lb_intby').text(fullData.intBy.trim());
+        $('#lb_kesby').text(fullData.kesBy.trim());
+        $('#lb_duty').text( await LocaleString(fullData.duty.trim()));
+        $('#lb_1stdue').text( await LocaleString(fullData.firstDueAmt.trim()));
+        $('#lb_1stcust').text( await fullData.firstCustDue.trim());
+        $('#lb_purchase').text( await LocaleString(fullData.purchaseAmt.trim()));
+        $('#lb_down').text( await LocaleString(fullData.downAmt.trim()));
+        $('#lb_principle').text( await LocaleString(fullData.principle.trim()));
+        $('#lb_received').text(fullData.received.trim());
+        $('#tb_termrate').css('visibility', 'visible');  
+        $('#tb_installment').css('visibility', 'visible');  
+    });
+    async function LocaleString(numer)
+    {
+        var strresult = parseFloat(numer).toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }).toString()
+        return strresult;
+    }
+</script>
+
+

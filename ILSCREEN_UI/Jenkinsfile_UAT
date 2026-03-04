@@ -1,0 +1,105 @@
+pipeline {
+    agent { label "hwcnp-jenkins-uat" } 
+    environment{ 
+        nexusURL="172.22.193.207:8123"
+		
+        appName="ilscreen-ui"
+        appPath="ILSCREEN_UI"
+		appPort="5000"
+        service="frontend"
+        product="ilscreen_system"
+		
+		replicaset="2"
+		cpu="100m"
+		memory="300Mi"
+        nameSpace="uat-internalapp-02"
+        host="ilscreen.uat.com"
+		
+    }
+    
+    stages {
+        stage ('Initialize') {
+            agent { 
+                label "hwcnp-jenkins-uat" 
+            }
+            steps {
+                sh "hostname"
+                sh "kubectl get nodes"
+                sh "docker ps"
+                sh '''
+                    echo "PATH = ${PATH}"
+                    cd src/${appPath}
+                    echo ${appName}
+                    echo ${newVersion}
+                '''
+            }
+        }
+		
+		stage ('Enter Move Version') {
+            agent {
+                label "hwcnp-jenkins-uat"
+            }
+            steps {
+                timeout(15){
+                    script {
+                        env.RELEASE_VERSION = input message: 'Enter Move Version', ok: 'Proceed', parameters: [string(defaultValue: '', description: '', name: 'Version')]
+                    }
+                }
+                echo "${env.RELEASE_VERSION}"
+            }
+        }
+		
+		stage ('Confirm Move Version') {
+            steps {
+                timeout(15){
+                    input "Confirm Move Version : ${env.RELEASE_VERSION}"
+                }
+            }
+        }
+		
+		stage ('Deploy UAT') {
+            agent { 
+                label "hwcnp-jenkins-uat" 
+            }
+            environment {
+                dockerurl="${nexusURL}"
+                replicaset="${replicaset}"
+                aspnetcoreenvironment="UAT"
+            }
+            steps {
+                sh '''
+                    cd src/${appPath}
+                    cp deployment.yaml deployment-${appName}-UAT.yaml
+                    sed -i s/#PRODUCT#/${product}/g deployment-${appName}-UAT.yaml
+					sed -i s/#SERVICETYPE#/${service}/g deployment-${appName}-UAT.yaml
+                    sed -i s/#APP_NAME#/${appName}/g deployment-${appName}-UAT.yaml
+                    sed -i s/#APP_VERSION#/${RELEASE_VERSION}/g deployment-${appName}-UAT.yaml
+                    sed -i s/#NAMESPACE#/${nameSpace}/g deployment-${appName}-UAT.yaml
+                    sed -i s/#HOST#/${host}/g deployment-${appName}-UAT.yaml
+                    sed -i s/#DOCKERURL#/${dockerurl}/g deployment-${appName}-UAT.yaml
+                    sed -i s/#REPLICASET#/${replicaset}/g deployment-${appName}-UAT.yaml
+                    sed -i s/#ASPNETCORE_ENVIRONMENT#/${aspnetcoreenvironment}/g deployment-${appName}-UAT.yaml
+					sed -i s/#MEMORY#/${memory}/g deployment-${appName}-UAT.yaml
+					sed -i s/#CPU#/${cpu}/g deployment-${appName}-UAT.yaml
+					sed -i s/#PORT#/${appPort}/g deployment-${appName}-UAT.yaml
+                    sed -i s/#DOCKERNAMESPACE#/${nameSpaceProd}/g deployment-${appName}-UAT.yaml
+                    sed -i s/#TIER#/${service}/g deployment-${appName}-UAT.yaml
+					
+                    cat deployment-${appName}-UAT.yaml
+                    kubectl apply -f deployment-${appName}-UAT.yaml
+                '''
+            }
+        }
+		
+		stage ('Deploy Success') {
+            agent { 
+                label "hwcnp-jenkins-uat" 
+            }
+            steps {
+                sh '''
+                    echo ${RELEASE_VERSION}
+                '''
+            }
+        }
+    }
+}

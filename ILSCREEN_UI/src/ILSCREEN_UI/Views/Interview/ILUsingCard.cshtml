@@ -1,0 +1,911 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "IL Using Card";
+    ViewData["Controller"] = ViewContext.RouteData.Values["controller"]?.ToString();
+}
+
+<style>
+    span.input-group-text {
+        border-radius: 0.375rem 0 0 0.375rem !important;
+        color: #fff;
+        background-color: #f124ab;
+    }
+
+    input.textbox, select.textbox {
+        border: 1px solid #dee2e6;
+        border-radius: 0.375rem;
+        font-weight: 400;
+        line-height: 1.5;
+        padding: 0.375rem 0.75rem;
+    }
+</style>
+
+<!--begin::Row-->
+<div class="row">
+    <div class="col-sm-6"><h3 class="mb-0">@ViewData["Title"]</h3></div>
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-end">
+            @* <li class="breadcrumb-item"><a href="#">@ViewData["ControllerName"]</a></li> *@
+            <li class="breadcrumb-item"><a href="@("../" + ViewData["Controller"])">@ViewData["Controller"]</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+        </ol>
+    </div>
+</div>
+<!--end::Row-->
+<!--begin::Row-->
+<div class="row g-4">
+    <!--begin::Col-->
+    @*               <div class="col-12">
+                <div class="callout callout-info">
+                  For detailed documentation of Form visit
+                  <a href="https://getbootstrap.com/docs/5.3/forms/overview/" target="_blank" rel="noopener noreferrer" class="callout-link">
+                    Bootstrap Form
+                  </a>
+                </div>
+              </div> *@
+    <!--end::Col-->
+    <!--begin::Col-->
+    <div class="col-12">
+        <!--begin::Quick Example-->
+        <div class="card card-primary card-outline mb-4">
+            <!--begin::Header-->
+            <div class="card-header"><div class="card-title">Appove by using card</div></div>
+            <!--end::Header-->
+            <!--begin::Form-->
+            <form>
+                <!--begin::Body-->
+                <div class="card-body">
+                    <div class="mb-2">
+                        <label for="exampleInputEmail1" class="form-label">Card Number : </label>
+                        <input type="email" id="exampleInputEmail1" aria-describedby="emailHelp" style="
+                                width: 30%;
+                                border: 1px solid #dee2e6;
+                                border-radius: 0.375rem;
+                                font-weight: 400;
+                                line-height: 1.5;
+                                padding: 0.375rem 0.75rem;" />
+                        <button type="submit" class="btn btn-primary">Search</button>
+                        <button type="submit" class="btn btn-danger">Clear</button>
+                        &emsp;&emsp;&emsp;&emsp;
+
+                        @* <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> *@
+                        <label class="form-label fw-bold">นาวสาว ทดสอบหนึ่ง แพทไฟล์</label>&emsp;&emsp;&emsp;<label class="form-label fw-bold">68000084</label>
+                    </div>
+                    <div class="mb-2">
+                        <label for="exampleInputEmail1" class="form-label">Application Date : </label>
+                        <input type="email" id="exampleInputEmail1" aria-describedby="emailHelp" style="
+                                    width: 22%;
+                                    border: 1px solid #dee2e6;
+                                    border-radius: 0.375rem;
+                                    font-weight: 400;
+                                    line-height: 1.5;
+                                    padding: 0.375rem 0.75rem;" />
+
+                        <label for="exampleInputEmail1" class="form-label">ID Number : </label>
+                        <input type="email" id="exampleInputEmail1" aria-describedby="emailHelp" style="
+                                    width: 22%;
+                                    border: 1px solid #dee2e6;
+                                    border-radius: 0.375rem;
+                                    font-weight: 400;
+                                    line-height: 1.5;
+                                    padding: 0.375rem 0.75rem;" />
+
+                        <label for="exampleInputEmail1" class="form-label">Expire Date : </label>
+                        <input type="email" id="exampleInputEmail1" aria-describedby="emailHelp" style="
+                                    width: 22%;
+                                    border: 1px solid #dee2e6;
+                                    border-radius: 0.375rem;
+                                    font-weight: 400;
+                                    line-height: 1.5;
+                                    padding: 0.375rem 0.75rem;" />
+                        <button type="submit" class="btn btn-primary">Add Note</button>
+                        @* <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> *@
+                    </div>
+
+                    <div class="mb-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Judment Form</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">TCL Result & Product</button>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active mt-2" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row mb-2">
+                                            <div class="col-6">
+                                                <div class="row align-items-center">
+                                                    <label for="InputBirthDte" class="col-6 col-form-label">1. Birth Date(ววดดปปปป):</label>
+                                                    <div class="col-6">
+                                                        <input type="date" class="form-control" id="InputBirthDte">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="row align-items-center">
+                                                    <label for="SelectOccupation" class="col-4 col-form-label">8. Occupation:</label>
+                                                    <div class="col-8">
+                                                        <select class="form-select" id="SelectOccupation">
+                                                            <option>040 : งานประจำสำนักงาน</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-6">
+                                                <div class="row align-items-center">
+                                                    <label for="InputBirthDteConfirm" class="col-6 col-form-label">1.1 Birth Date(confirm)</label>
+                                                    <div class="col-6">
+                                                        <input type="date" class="form-control" id="InputBirthDteConfirm">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="row align-items-center">
+                                                    <label for="SelectCommercialRegis" class="col-4 col-form-label">Commercial Regis</label>
+                                                    <div class="col-8">
+                                                        <select class="form-select" id="SelectCommercialRegis">
+                                                            <option>&ensp;</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-6">
+                                                <div class="row align-items-center">
+                                                    <label for="InputMobile" class="col-6 col-form-label">2. Telephone (Mobile)</label>
+                                                    <div class="col-3">
+                                                        <input type="radio" id="InputMobileYes" name="InputMobile" value="Yes" /> <label for="InputMobileYes">Yes</label>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <input type="radio" id="InputMobileNo" name="InputMobile" value="No" /> <label for="InputMobileNo">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="row align-items-center">
+                                                    <label for="SelectPosition" class="col-4 col-form-label">9. Position</label>
+                                                    <div class="col-8">
+                                                        <select class="form-select" id="SelectPosition">
+                                                            <option>&ensp;</option>
+                                                        </select>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-6">
+                                                <div class="row align-items-center">
+                                                    <label for="InputMobile" class="col-6 col-form-label">2.1 Mobile No.</label>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control" id="InputMobile">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="row align-items-center">
+                                                    <label for="InputTotalEmployee" class="col-4 col-form-label">10. Total of employee</label>
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control" id="InputTotalEmployee">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-6">
+                                                <div class="row align-items-center">
+                                                    <label for="InputMobileConfirm" class="col-6 col-form-label">2.1 Mobile No.(Confirm)</label>
+                                                    <div class="col-6">
+                                                        <input type="text" class="form-control" id="InputMobileConfirm">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="row align-items-center">
+                                                    <label for="InputEmployeeType" class="col-4 col-form-label">11. Employee Type</label>
+                                                    <div class="col-8">
+                                                        <select class="form-select" id="InputEmployeeType">
+                                                            <option>&ensp;</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-6">
+                                                <div class="row align-items-center">
+                                                    <label for="SelectMaritalStatus" class="col-6 col-form-label">3. Marital status</label>
+                                                    <div class="col-6">
+                                                        <select class="form-select" id="SelectMaritalStatus">
+                                                            <option>&ensp;</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="row align-items-center">
+                                                    <label for="InputLengthService" class="col-4 col-form-label">12. Length of service</label>
+                                                    <div class="col-2">
+                                                        <input type="number" class="form-control" id="InputLengthServiceYear">
+                                                    </div>
+                                                    <label for="InputLengthServiceYear" class="col-2 col-form-label">Year</label>
+                                                    <div class="col-2">
+                                                        <input type="number" class="form-control" id="InputLengthServiceMonth">
+                                                    </div>
+                                                    <label for="InputLengthServiceMonth" class="col-2 col-form-label">Month</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-6">
+                                                <div class="row align-items-center">
+                                                    <label for="SelectTypeResident" class="col-6 col-form-label">4. Type of resident</label>
+                                                    <div class="col-6">
+                                                        <select class="form-select" id="SelectTypeResident">
+                                                            <option>&ensp;</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="row align-items-center">
+                                                    <label for="InputSalary" class="col-4 col-form-label">13. Salary</label>
+                                                    <div class="col-6">
+                                                        <input type="number" class="form-control" id="InputSalary">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-6">
+                                                <div class="row align-items-center">
+                                                    <label for="InputTotalFamily" class="col-6 col-form-label">5. Total of family</label>
+                                                    <div class="col-4">
+                                                        <input type="number" class="form-control" id="InputTotalFamily">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="row align-items-center">
+                                                    <label for="BtnCalculate" class="col-4 col-form-label"></label>
+                                                    <div class="col-4">
+                                                        <button id="BtnCalculate" type="button" class="btn btn-primary">Calculate ACL</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-6">
+                                                <div class="row align-items-center">
+                                                    <label for="InputPeriodResident" class="col-6 col-form-label">6. Period of time resident</label>
+                                                    <div class="col-2">
+                                                        <input type="number" class="form-control" id="InputPeriodResidentYear">
+                                                    </div>
+                                                    <label for="InputPeriodResidentYear" class="col-2 col-form-label">Year</label>
+                                                    <div class="col-2">
+                                                        <input type="number" class="form-control" id="InputPeriodResidentMonth">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="row align-items-center">
+                                                    <label for="InputPeriodResidentMonth" class="col-2 col-form-label">Month</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-6">
+                                                <div class="row align-items-center">
+                                                    <label for="SelectTypeBusiness" class="col-6 col-form-label">7. Type of Business</label>
+                                                    <div class="col-6">
+                                                        <select class="form-select" id="SelectTypeBusiness">
+                                                            <option>&ensp;</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+@*                                         <div class="row">
+                                            <div class="col-6">
+                                                <div class="mb-2">
+                                                    <label for="exampleInputEmail1" class="form-label col-5">1. Birth Date (วัน/เดือน/ปี) : </label>
+                                                    <input class="col-6" type="email" id="exampleInputEmail1" aria-describedby="emailHelp" style="
+                                                border: 1px solid #dee2e6;
+                                                border-radius: 0.375rem;
+                                                font-weight: 400;
+                                                line-height: 1.5;
+                                                padding: 0.375rem 0.75rem;" />
+                                                </div>
+
+                                                <div class="mb-2">
+                                                    <label for="exampleInputEmail1" class="form-label col-3">1.1 Birth Date (Confirm) : </label>
+                                                    <input type="email" id="exampleInputEmail1" aria-describedby="emailHelp" style="
+                                                width: 22%;
+                                                border: 1px solid #dee2e6;
+                                                border-radius: 0.375rem;
+                                                font-weight: 400;
+                                                line-height: 1.5;
+                                                padding: 0.375rem 0.75rem;" />
+                                                </div>
+
+                                                <div class="mb-2">
+                                                    <label for="InputMobile" class="form-label col-3">2. Telephone (Mobile) : </label>
+                                                    <input type="radio" id="InputMobileYes" name="InputMobile" value="Yes" /> <label for="InputMobileYes">Yes</label>
+                                                    &emsp;
+                                                    <input type="radio" id="InputMobileNo" name="InputMobile" value="No" /> <label for="InputMobileNo">No</label>
+                                                </div>
+
+                                                <div class="mb-2">
+                                                    <label for="exampleInputEmail1" class="form-label col-3">2.1 Mobile No. : </label>
+                                                    <input type="email" id="exampleInputEmail1" aria-describedby="emailHelp" style="
+                                                width: 22%;
+                                                border: 1px solid #dee2e6;
+                                                border-radius: 0.375rem;
+                                                font-weight: 400;
+                                                line-height: 1.5;
+                                                padding: 0.375rem 0.75rem;" />
+                                                </div>
+
+                                                <div class="mb-2">
+                                                    <label for="exampleInputEmail1" class="form-label col-3">2.2 Mobile No. (Confirm) : </label>
+                                                    <input type="email" id="exampleInputEmail1" aria-describedby="emailHelp" style="
+                                                width: 22%;
+                                                border: 1px solid #dee2e6;
+                                                border-radius: 0.375rem;
+                                                font-weight: 400;
+                                                line-height: 1.5;
+                                                padding: 0.375rem 0.75rem;" />
+                                                </div>
+
+                                                <div class="mb-2">
+                                                    <label for="exampleInputEmail1" class="form-label col-3">3. Marital Status : </label>
+                                                    <select class="col-6" id="SelectTypeBusiness" style="
+                                                            border: 1px solid #dee2e6;
+                                                            border-radius: 0.375rem;
+                                                            font-weight: 400;
+                                                            line-height: 1.5;
+                                                            padding: 0.375rem 0.75rem;">
+                                                        <option>1 : โสด</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="mb-2">
+                                                    <label for="exampleInputEmail1" class="form-label col-3">4. Type of Resident : </label>
+                                                    <select class="col-6" id="SelectTypeBusiness" style="
+                                                            border: 1px solid #dee2e6;
+                                                            border-radius: 0.375rem;
+                                                            font-weight: 400;
+                                                            line-height: 1.5;
+                                                            padding: 0.375rem 0.75rem;">
+                                                        <option>01 : บ้านตนเอง</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="mb-2">
+                                                    <label for="exampleInputEmail1" class="form-label col-3">5. Total of Family : </label>
+                                                    <input type="email" id="exampleInputEmail1" aria-describedby="emailHelp" style="
+                                                            width: 22%;
+                                                            border: 1px solid #dee2e6;
+                                                            border-radius: 0.375rem;
+                                                            font-weight: 400;
+                                                            line-height: 1.5;
+                                                            padding: 0.375rem 0.75rem;" />
+                                                </div>
+
+                                                <div class="mb-2">
+                                                    <label for="exampleInputEmail1" class="form-label col-3">6. Period of time resident : </label>
+                                                    <input type="email" id="exampleInputEmail1" aria-describedby="emailHelp" style="
+                                                            width: 22%;
+                                                            border: 1px solid #dee2e6;
+                                                            border-radius: 0.375rem;
+                                                            font-weight: 400;
+                                                            line-height: 1.5;
+                                                            padding: 0.375rem 0.75rem;" />
+                                                </div>
+
+                                                <div class="mb-2">
+                                                    <label for="SelectTypeBusiness" class="form-label col-3">7. Type of Business : </label>
+                                                    <select class="col-6" id="SelectTypeBusiness" style="
+                                                            border: 1px solid #dee2e6;
+                                                            border-radius: 0.375rem;
+                                                            font-weight: 400;
+                                                            line-height: 1.5;
+                                                            padding: 0.375rem 0.75rem;">
+                                                        <option>11 : การเงิน / หลักทรัพย์</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-6">
+                                                <div class="mb-2">
+                                                    <label for="SelectOccupation" class="form-label col-3">8. Occupation : </label>
+                                                    <select class="col-6" id="SelectOccupation" style="
+                                                            border: 1px solid #dee2e6;
+                                                            border-radius: 0.375rem;
+                                                            font-weight: 400;
+                                                            line-height: 1.5;
+                                                            padding: 0.375rem 0.75rem;">
+                                                        <option>040 : งานประจำสำนักงาน</option>
+                                                    </select>
+                                                </div>
+                                                
+                                                <div class="mb-2">
+                                                    <label for="SelectCommercialRegis" class="form-label col-3">Commercial Regis : </label>
+                                                    <select class="col-6" id="SelectCommercialRegis" style="
+                                                            border: 1px solid #dee2e6;
+                                                            border-radius: 0.375rem;
+                                                            font-weight: 400;
+                                                            line-height: 1.5;
+                                                            padding: 0.375rem 0.75rem;">
+                                                        <option>&ensp;</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="mb-2">
+                                                    <label for="SelectPosition" class="form-label col-3">9. Position : </label>
+                                                    <select class="col-6" id="SelectPosition" style="
+                                                            border: 1px solid #dee2e6;
+                                                            border-radius: 0.375rem;
+                                                            font-weight: 400;
+                                                            line-height: 1.5;
+                                                            padding: 0.375rem 0.75rem;">
+                                                        <option>&ensp;</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="mb-2">
+                                                    <label for="exampleInputEmail1" class="form-label col-3">10. Total of Employee : </label>
+                                                    <input type="email" id="exampleInputEmail1" aria-describedby="emailHelp" style="
+                                                width: 22%;
+                                                border: 1px solid #dee2e6;
+                                                border-radius: 0.375rem;
+                                                font-weight: 400;
+                                                line-height: 1.5;
+                                                padding: 0.375rem 0.75rem;" />
+                                                </div>
+
+                                                <div class="mb-2">
+                                                    <label for="SelectEmployeeType" class="form-label col-3">11. Employee Type : </label>
+                                                    <select class="col-6" id="SelectEmployeeType" style="
+                                                            border: 1px solid #dee2e6;
+                                                            border-radius: 0.375rem;
+                                                            font-weight: 400;
+                                                            line-height: 1.5;
+                                                            padding: 0.375rem 0.75rem;">
+                                                        <option>01 : พนักงานประจำรายเดือน</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="mb-2">
+                                                    <label for="exampleInputEmail1" class="form-label col-3">12. Length of Service : </label>
+                                                    <input type="email" id="exampleInputEmail1" aria-describedby="emailHelp" style="
+                                                        width: 22%;
+                                                        border: 1px solid #dee2e6;
+                                                        border-radius: 0.375rem;
+                                                        font-weight: 400;
+                                                        line-height: 1.5;
+                                                        padding: 0.375rem 0.75rem;" />
+                                                </div>
+
+                                                <div class="mb-2">
+                                                    <label for="exampleInputEmail1" class="form-label col-3">13. Salary : </label>
+                                                    <input type="email" id="exampleInputEmail1" aria-describedby="emailHelp" style="
+                                                        width: 22%;
+                                                        border: 1px solid #dee2e6;
+                                                        border-radius: 0.375rem;
+                                                        font-weight: 400;
+                                                        line-height: 1.5;
+                                                        padding: 0.375rem 0.75rem;" />
+                                                </div>
+
+                                                <div class="mb-2">
+                                                    <label for="BtnCalculateACL" class="form-label col-3"></label>
+                                                    <button class="btn btn-primary" id="BtnCalculateACL">Calculate ACL</button>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+ *@                                    </div>
+
+
+
+
+                                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                        <br />
+                                        <div class="bg-info bg-opacity-50 border border-black card-body mb-2">
+                                            <div class="row mb-2">
+                                                <label for="InputEBCLimit" class="col-2">EBC Limit</label>
+                                                <input type="text" class="textbox col-2" id="InputEBCLimit" value="28,500.00" />
+                                                <label for="" class="col-2">Total Credit Line (Existing)</label>
+                                                <input type="text" class="textbox col-2" value="58,800.00" />
+                                                <label for="" class="col-2">Customer Balance</label>
+                                                <input type="text" class="textbox col-2" value="0.00" />
+                                            </div>
+                                            <div class="row mb-2">
+                                                <label for="" class="col-2">TCL Available</label>
+                                                <input type="text" class="textbox col-1" value="28,500.00" />
+                                                <input type="text" class="textbox col-1 ms-1" value="0.00" />
+                                                <label for="" class="col-2 ms-xxl-n1">BOT Loan</label>
+                                                <input type="text" class="textbox col-2" value="200,800.00" />
+                                                <label for="" class="col-2">BOT Credit Available</label>
+                                                <input type="text" class="textbox col-2" value="200,000.00" />
+                                            </div>
+                                            <div class="row mb-2">
+                                                <label for="" class="col-2">Income</label>
+                                                <span class="col-2">40,000.00</span>
+                                                <label for="" class="col-2">Approve available</label>
+                                                <span class="col-2">28,500.00</span>
+                                            </div>
+                                            <div class="row mb-2">
+                                                <label for="" class="col-2">Group No.</label>
+                                                <input type="text" class="textbox col-2 bg-dark-subtle" disabled="" />
+                                                <label for="" class="col-2">Rank</label>
+                                                <input type="text" class="textbox col-2 bg-dark-subtle" disabled="" />
+                                            </div>
+                                        </div>
+
+                                        <div class="bg-info-subtle border border-black card-body mb-2">
+                                            <h5 class="text-primary"><u>Payment Type</u></h5>
+                                            <div class="row m-2">
+                                                <label for="SelectPaymentType" class="col-2">Payment Type</label>
+                                                <select class="textbox col-2" id="SelectPaymentType">
+                                                    <option>2 : ชำระด้วยเงินสด</option>
+                                                </select>
+                                                <label for="" class="col-2">Reason Code</label>
+                                                <select class="textbox col-2" id="SelectPaymentType">
+                                                    <option>A : อนุมัติ</option>
+                                                </select>
+                                                <button class="btn btn-primary col-md-auto m-1" id="BtnSaveCreditL">Save Credit</button>
+                                                <button class="btn btn-danger col-md-auto m-1" id="BtnCancelCase">Cancel Case</button>
+                                            </div>
+                                            <h5 class="text-primary"><u>Product</u></h5>
+                                            <div class="row m-2">
+                                                <label for="" class="col-2">Total Term</label>
+                                                <input type="text" class="col-3 textbox bg-dark-subtle" id="InputTotalTerm" disabled="">
+                                            </div>
+                                            <div class="row m-2">
+                                                <label for="" class="col-2">Vender</label>
+                                                <select class="textbox col-3" id="SelectVender">
+                                                    <option>0100015624165 : SUMMIT QUEEN LIMITED</option>
+                                                </select>
+                                                <input type="text" class="col-1 ms-auto textbox bg-dark-subtle" id="InputVender" value="A3" disabled="">
+                                                <div class="col-1"></div>
+                                                <label for="" class="col-2">Campaign Type</label>
+                                                <input type="text" class="col-2 textbox bg-dark-subtle" id="InputCampaignType" disabled="" value="R">
+                                            </div>
+                                            <div class="row m-2">
+                                                <label for="SelectCampaign" class="col-2">Campaign</label>
+                                                <select class="textbox col-5" id="SelectCampaign">
+                                                    <option>39999999999-Sukumvit-QUEEN (Normal rate 1.6%) Underware</option>
+                                                </select>
+                                                <div class="col-1"></div>
+                                                <label for="" class="col-2">Campaign Seq.</label>
+                                                <input type="text" class="col-2 textbox bg-dark-subtle" id="InputCampaignSeq" disabled="">
+                                            </div>
+                                            <div class="row m-2">
+                                                <label for="SelectProduct" class="col-2">Product</label>
+                                                <select class="textbox col-3" id="SelectProduct">
+                                                    <option>B345 : BEAUTY</option>
+                                                </select>
+                                                <div class="col-3">
+                                                    <button class="btn btn-light" type="button">...</button>
+                                                </div>
+                                                <label for="" class="col-2">Payment ability</label>
+                                                <input type="text" class="col-2 textbox text-danger bg-dark-subtle" id="InputPaymentAbility" disabled="" value="12,000.00">
+                                            </div>
+                                            <div class="row m-2">
+                                                <label for="InputTotalRange" class="col-2">Total Range</label>
+                                                <input type="text" class="textbox col-2 bg-dark-subtle" id="InputTotalRange" disabled="">
+                                                <label for="" class="col-1">Non</label>
+                                                <input type="text" class="textbox col-2 bg-dark-subtle" id="InputDue" disabled="">
+                                                <label for="InputDue" class="col-1">Due</label>
+                                            </div>
+                                            <div class="row m-2">
+                                                <label for="InputPriceItem" class="col-2">Price/Item</label>
+                                                <input type="text" class="textbox col-2" id="InputPriceItem" value="0.00">
+                                                <label for="InputTotalQuatity" class="col-2">Total Quatity</label>
+                                                <input type="number" class="textbox col-1" id="InputTotalQuatity" value="1">
+                                                <div class="col-1"></div>
+                                                <label for="InputTotalPurchase" class="col-2">Total Purchase</label>
+                                                <input type="text" class="textbox col-2 bg-dark-subtle" id="InputTotalPurchase" disabled="">
+                                            </div>
+                                            <div class="row m-2">
+                                                <label for="InputMinPrice" class="col-2">Min Price</label>
+                                                <input type="text" class="textbox col-2 bg-dark-subtle" id="InputMinPrice" disabled="">
+                                                <input type="text" class="col-2 ms-2 textbox bg-dark-subtle" id="InputMaxPrice" disabled="">
+                                                <label for="InputLoanRequest" class="col-2 ms-auto">Loan request</label>
+                                                <input type="text" class="textbox col-2 bg-dark-subtle" id="InputLoanRequest" disabled="">
+                                            </div>
+                                            <div class="row m-2">
+                                                <label for="InputDown" class="col-2">Down</label>
+                                                <input type="text" class="textbox col-2" id="InputDown" value="0.00">
+                                                <label for="InputFirstDueAmount" class="col-2">First due amount</label>
+                                                <input type="text" class="textbox col-2 bg-dark-subtle" id="InputFirstDueAmount" disabled="">
+                                                <label for="InputFirstDueDate" class="col-2">First due date</label>
+                                                <input type="date" class="textbox col-2 bg-dark-subtle" id="InputFirstDueDate" disabled="">
+                                            </div>
+                                            <div class="row m-2">
+                                                <label for="InputDutyStamp" class="col-2">Duty Stamp</label>
+                                                <input type="text" class="textbox col-2 bg-dark-subtle" id="InputDutyStamp" disabled="">
+                                                <label for="InputIntAvg" class="col-2">Int.Avg %</label>
+                                                <input type="text" class="textbox col-2 bg-dark-subtle" id="InputIntAvg" disabled="">
+                                                <label for="InputCrUsgAvg" class="col-2">Cr.Usg Avg %</label>
+                                                <input type="text" class="textbox col-2 bg-dark-subtle" id="InputCrUsgAvg" disabled="">
+                                            </div>
+                                            <div class="row m-2">
+                                                <label for="InputCreditBureau" class="col-2">Credit Bureau</label>
+                                                <input type="text" class="textbox col-2 bg-dark-subtle" id="InputCreditBureau" disabled="">
+                                                <label for="InputContractAmount" class="col-2 ms-auto">Contract Amount</label>
+                                                <input type="text" class="textbox col-2 bg-dark-subtle" id="InputContractAmount" disabled="">
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-2">
+                                            <Label id="lb_termrate" class="fw-bold fs-4 text-primary text-decoration-underline"> Description term and rate</Label>
+                                            <table class="table table-bordered table-striped table-hover text-center">
+                                                <thead>
+                                                    <tr class="table-info">
+                                                        <th scope="col">From Term</th>
+                                                        <th scope="col">To Term</th>
+                                                        <th scope="col">Int%</th>
+                                                        <th scope="col">INT%(EIR/YEAR)</th>
+                                                        <th scope="col">CRU%</th>
+                                                        <th scope="col">CRU%(EIR/YEAR)</th>
+                                                        <th scope="col">Init.Fee</th>
+                                                        <th scope="col">Total Amount</th>
+                                                        <th scope="col">Oth</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>12</td>
+                                                        <td>00.68</td>
+                                                        <td>14.64</td>
+                                                        <td>00.37</td>
+                                                        <td>7.92</td>
+                                                        <td>0.00</td>
+                                                        <td>8,000.00</td>
+                                                        <td>0.00</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+
+                                            <Label id="lb_installment" class="fw-bold fs-4 text-primary text-decoration-underline">Description Installment</Label>
+                                            <table class="table table-bordered table-striped table-hover text-center">
+                                                <thead>
+                                                    <tr class="table-info">
+                                                        <th scope="col">Term</th>
+                                                        <th scope="col">Begin</th>
+                                                        <th scope="col">Principal</th>
+                                                        <th scope="col">Installment</th>
+                                                        <th scope="col">Interest</th>
+                                                        <th scope="col">Cr. Usage</th>
+                                                        <th scope="col">INIT.FEE</th>
+                                                        <th scope="col">Pay Principal</th>
+                                                        <th scope="col">New Principal</th>
+                                                        <th scope="col">Income</th>
+                                                        <th scope="col">Closing Date</th>
+                                                        <th scope="col">Closing rebate</th>
+                                                        <th scope="col">Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>21/09/2556</td>
+                                                        <td>8,000.00</td>
+                                                        <td>755.00</td>
+                                                        <td>134.76</td>
+                                                        <td>72.90</td>
+                                                        <td>0.00</td>
+                                                        <td>543.34</td>
+                                                        <td>7,456.66</td>
+                                                        <td>211.66</td>
+                                                        <td>01/12/2566</td>
+                                                        <td>0.00</td>
+                                                        <td>0.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>21/09/2556</td>
+                                                        <td>8,000.00</td>
+                                                        <td>755.00</td>
+                                                        <td>134.76</td>
+                                                        <td>72.90</td>
+                                                        <td>0.00</td>
+                                                        <td>543.34</td>
+                                                        <td>7,456.66</td>
+                                                        <td>211.66</td>
+                                                        <td>01/12/2566</td>
+                                                        <td>0.00</td>
+                                                        <td>0.00</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                       @*  <div class="row">
+                                            <div class="col-1"></div>
+                                            <div class="col-4">
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            1. Birth Date (วัน/เดือน/ปี) : 
+                                                        </span>
+                                                    </div>
+                                                    <input type="date" class="form-control" placeholder="Birth Date (วัน/เดือน/ปี)" />
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            1.1 Birth Date (Confirm) :
+                                                        </span>
+                                                    </div>
+                                                    <input type="date" class="form-control" placeholder="Birth Date (Confirm)" />
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            2. Telephone (Mobile) :
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Telephone (Mobile)" />
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            2.1 Mobile No. :
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            2.2 Mobile No. (Confirm) :
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            3. Marital Status :
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            4. Type of Resident :
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            5. Total of Family :
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            6. Period of time resident :
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            7. Type of Business :
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" />
+                                                </div>
+
+                                            </div>
+                                            <div class="col-2"></div>
+                                            <div class="col-4">
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            8. Occupation :
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Occupation" />
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            8.1 Commercial Regis :
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Commercial Regis" />
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            9. Position :
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Position" />
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            10. Total of Employee :
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Total of Employee" />
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            11. Employee Type :
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Employee Type" />
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            12. Length of Service :
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Length of Service" />
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            13. Salary :
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Salary" />
+                                                </div>
+                                            </div>
+                                            <div class="col-1"></div>
+                                        </div> *@
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Body-->
+                <!--begin::Footer-->
+                @* <div class="card-footer text-center">
+                    <h2>Thank You.</h2>
+                </div> *@
+                <!--end::Footer-->
+            </form>
+            <!--end::Form-->
+        </div>
+        <!--end::Quick Example-->
+    </div>
+    <!--end::Col-->
+</div>
+<!--end::Row-->

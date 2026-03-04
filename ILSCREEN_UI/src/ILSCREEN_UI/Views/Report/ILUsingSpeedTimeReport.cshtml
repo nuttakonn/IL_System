@@ -1,0 +1,295 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "IL Using Speed Time Report";
+    ViewData["Controller"] = ViewContext.RouteData.Values["controller"]?.ToString();
+}
+
+<!--begin::Row-->
+<div class="row">
+    <div class="col-sm-6"><h3 class="mb-0">@ViewData["Title"]</h3></div>
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-end">
+            @* <li class="breadcrumb-item"><a href="#">@ViewData["ControllerName"]</a></li> *@
+            <li class="breadcrumb-item"><a href="@("../" + ViewData["Controller"])">@ViewData["Controller"]</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+        </ol>
+    </div>
+</div>
+<!--end::Row-->
+<!--begin::Row-->
+<div class="row g-4">
+    <!--begin::Col-->
+    <div class="col-12">
+        <!--begin::Quick Example-->
+        <div class="card card-secondary card-outline mb-4">
+            <!--begin::Header-->
+            <div class="card-header"><div class="card-title">@ViewData["Title"]</div></div>
+            <!--end::Header-->
+            <!--begin::Form-->
+                <!--begin::Body-->
+                <div class="card-body">
+                <form id="FormSubmit" action="/Report/ILUsingSpeedTimeReportExport" method="post">
+                    <div class="form-group row mb-3">
+                        <label for="SelectBranch" class="col-md-2 col-form-label form-label">Date From : </label>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-calendar-day-fill"></i>
+                                    </span>
+                                </div>
+                                <input type="date" class="form-control float-right" id="InputDateFrom" name="InputDateFrom">
+                                <label for="SelectBranch" class="col-md-1 col-form-label form-label text-center">To</label>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-calendar-day-fill"></i>
+                                    </span>
+                                </div>
+                                <input type="date" class="form-control float-right" id="InputDateTo" name="InputDateTo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label for="SelectBranch" class="col-md-2 col-form-label form-label">Branch : </label>
+                        <div class="col-md-3">
+                            <select id="SelectBranch" name="SelectBranch" class="form-control form-select">
+                                <option>001 : สำนักงานใหญ่</option>
+                                <option>002 : โคราช</option>
+                                <option>003 : ระยอง</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-primary">Refresh Branch</button>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label for="SelectApplicationType" class="col-md-2 col-form-label form-label">Application Type : </label>
+                        <div class="col-md-3">
+                            <select id="SelectApplicationType" name="SelectApplicationType" class="form-control form-select">
+                                <option>USING CARD TYPE</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label for="SeachBy" class="col-md-2 col-form-label form-label">User : </label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control float-right" id="InputUser">
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label for="SelectDepartment" class="col-md-2 col-form-label form-label">Department : </label>
+                        <div class="col-md-3">
+                            <select id="SelectDepartment" name="SelectDepartment" class="form-control form-select">
+                                <option>OC : OPERATION CENTER</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label for="SeachBy" class="col-md-2 col-form-label form-label"></label>
+                        <div class="col-md-3 text-center">
+                            <button type="button" class="btn btn-primary" onclick="Search()">Search</button>
+                            <button type="button" class="btn btn-primary" onclick="GetInputForm('PDF')">Export PDF</button>
+                            <button type="button" class="btn btn-primary" onclick="GetInputForm('CSV')">Export CSV</button>
+                            @* <a class="btn btn-primary" href="/Report/ExportToPDF" target="_blank">Export PDF</a> *@
+                            @* <a class="btn btn-primary" href="/Report/ExportUsersToCsv" target="_blank">Export CSV</a> *@
+                            <button type="button" class="btn btn-danger" onclick="Reset()">Reset</button>
+                        </div>
+                    </div>
+                    </form>
+
+                    <br />
+
+                    <table id="tb_ILUsingSpeedTimeReport" class="table table-bordered table-striped table-hover text-center">
+                        <thead>
+                            <tr class="table-info">
+                                <th scope="col">No.</th>
+                                <th scope="col">Application Date</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Vendor ID</th>
+                                <th scope="col">Contract No.</th>
+                                <th scope="col">Start Time</th>
+                                <th scope="col">End Time</th>
+                                <th scope="col">Speed Time</th>
+                                <th scope="col">User</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           @*  <tr>
+                                <th scope="row">1</th>
+                                <td>21/09/2556</td>
+                                <td>นางสาว น้ำอ้อย หวานเจี๊ยบ</td>
+                                <td>010133280015</td>
+                                <td>4722001140446835</td>
+                                <td> </td>
+                                <td>16:13:14</td>
+                                <td> </td>
+                                <td>NMP2403020</td>
+                            </tr> *@
+                        </tbody>
+                    </table>
+                </div>
+                <!--end::Body-->
+                <!--begin::Footer-->
+                @* <div class="card-footer text-center">
+                    <h2>Thank You.</h2>
+                </div> *@
+                <!--end::Footer-->
+            <!--end::Form-->
+        </div>
+        <!--end::Quick Example-->
+    </div>
+    <!--end::Col-->
+</div>
+<!--end::Row-->
+
+
+
+
+<script>
+
+    var tbData_ILUsingSpeedTimeReport = null;
+
+    function GetInputForm(typeFile) {
+        // let dateFrom = $('#InputDateFrom').val();
+        // let dateTo = $('#InputDateTo').val();
+        // let branch = $('#SelectBranch').find(':selected').val();
+        // let applicationType = $('#SelectApplicationType').find(':selected').val();
+        // let user = $('#InputUser').val();
+        // let department = $('#SelectDepartment').find(':selected').val();
+        $('#FormSubmit').attr('target', '_blank');
+        // $('#FormSubmit').append('<input type="hidden" id="InputTypeFile" name="InputTypeFile" value="' + typeFile + '" />');
+        if (!$('#FormSubmit').children().is('input#InputTypeFile')) {
+            $('#FormSubmit').append($('<input type="hidden" id="InputTypeFile" name="InputTypeFile">').attr('value', typeFile));
+        }
+        $('input#InputTypeFile').attr('value', typeFile);
+        $('#FormSubmit').submit();
+    }
+
+    function initial() {
+
+        tbData_ILUsingSpeedTimeReport = $('#tb_ILUsingSpeedTimeReport').DataTable({
+            "lengthChange": true,
+            responsive: true,
+            "pageLength": 20,
+            scrollX: true,
+            columns: [
+                {
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                    render: function (data, type, row, meta) {
+                        return ++meta.row;
+                    }
+                },
+                {
+                    type: 'string',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+            ]
+        });
+    }
+
+    async function Search() {
+        tbData_ILUsingSpeedTimeReport.rows().remove();
+        tbData_ILUsingSpeedTimeReport.clear();
+        tbData_ILUsingSpeedTimeReport.draw(false);
+        $('td[colspan=9].dt-empty').html('<div class="spinner-border text-secondary" role="status"><span class="visually-hidden">Loading...</span></div>');
+
+        // let result = [{
+        //         no: '1',
+        //         applicationDate: '21/09/2556',
+        //         name: 'นางสาว น้ำอ้อย หวานเจี๊ยบ',
+        //         vendorID: '010133280015',
+        //         contractNo: '4722001140446835',
+        //         startTime: '09:13:20',
+        //         endTime: '16:13:14',
+        //         speedTime: '0.3',
+        //         user: 'P4001009',
+        // }];
+
+        let inputData = { dateFrom: $('#InputDateFrom').val(), dateTo: $('#InputDateTo').val(), branch: $('#SelectBranch').find(':selected').val(), applicationType: $('#SelectApplicationType').find(':selected').val(), user: $('#InputUser').val(), department: $('#SelectDepartment').find(':selected').val() };
+        let result = await postData('/Report/ILUsingSpeedTimeReportSearching', inputData);
+
+        if (result.length > 0) {
+            for (var i = 0; i < result.length; i++) {
+                 let btn = `<button class="btn btn-link btn-view fw-bold" data-index="${i}">Select</button>`;
+                 // เพิ่ม row ใน DataTable
+                let row = tbData_ILUsingSpeedTimeReport.row.add([
+                    btn,
+                    result[i].applicationDate,
+                    result[i].name,
+                    result[i].vendorID,
+                    result[i].contractNo,
+                    result[i].startTime,
+                    result[i].endTime,
+                    result[i].speedTime,
+                    result[i].user,
+                ]).draw(false);
+
+                // แนบข้อมูลเต็มของแถวใน DataTable โดยใช้ row().data()
+                let rowData = row.data();
+                rowData.full = result[i];  // เพิ่มข้อมูลเต็มของแถว
+                row.data(rowData);  // อัปเดตข้อมูลของแถวใน DataTable
+            }
+        }else{
+            $('td[colspan=9].dt-empty').html('<span>Data Not Found.</span>');
+        }
+    }
+
+    function Reset() {
+        $('#InputDateFrom').val(new Date());
+        $('#InputDateTo').val(new Date());
+        $('#SelectBranch').prop('selectedIndex', 0);
+        $('#SelectApplicationType').prop('selectedIndex', 0);
+        $('#InputUser').val('');
+        $('#SelectDepartment').prop('selectedIndex', 0);
+    }
+
+    $(document).ready(function () {
+        initial();
+    });
+</script>

@@ -1,0 +1,502 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Sign Contract";
+    ViewData["Controller"] = ViewContext.RouteData.Values["controller"]?.ToString();
+}
+
+<style>
+
+    span.input-group-text {
+        border-radius: 0.375rem 0 0 0.375rem !important;
+        color: #fff;
+        background-color: #f124ab;
+    }
+    /* เปลี่ยนสีพื้นหลังของตาราง */
+    table.dataTable {
+        background-color: #f4f4f9;
+    }
+
+        /* เปลี่ยนสีพื้นหลังของแถวเมื่อ hover */
+        table.dataTable tbody tr:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* เปลี่ยนสีหัวคอลัมน์ */
+        table.dataTable thead {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* เปลี่ยนสีขอบตาราง */
+        table.dataTable, table.dataTable th, table.dataTable td {
+            border: 1px solid #ddd;
+        }
+</style>
+
+<!--begin::Row-->
+<div class="row">
+    <div class="col-sm-6"><h3 class="mb-0">@ViewData["Title"]</h3></div>
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-end">
+            @* <li class="breadcrumb-item"><a href="#">@ViewData["ControllerName"]</a></li> *@
+            <li class="breadcrumb-item"><a href="@("../" + ViewData["Controller"])">@ViewData["Controller"]</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+        </ol>
+    </div>
+</div>
+<!--end::Row-->
+<!--begin::Row-->
+<div class="card card-secondary card-outline mb-4">
+    <div class="card-header"><div class="card-title">@ViewData["Title"]</div></div>
+
+    <!--end::Row-->
+    <div class="card-body">
+        <div class="form-group row mb-3">
+            <label class="col-md-3 col-form-label text-end">Vendor Code :</label>
+            <div class="col-md-6">
+                <select id="sl_vendor" class="form-control form-select">
+                    <option>option 1</option>
+                    <option>option 2</option>
+                    <option>option 3</option>
+                    <option>option 4</option>
+                    <option>option 5</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row mb-4">
+            <label class="col-md-3 col-form-label text-end">Contract No :</label>
+            <div class="col-md-6">
+                <input id="in_contract" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <button id="btn_search" class="btn btn-primary" type="button" onclick="searchData()">Search</button>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-body">
+        <table id="tb_result" class="table table-bordered table-striped table-hover text-center" style="display:none;">
+            <thead>
+                <tr class="table-info">
+                    <th>Select</th>
+                    <th>Contract No.</th>
+                    <th>Approve Date</th>
+                    <th>Name</th>
+                    <th>Cnt.Amount</th>
+                </tr>
+            </thead>
+            <tbody >
+            </tbody>
+        </table>
+    </div>
+    <div class="card-body">
+        <table id="tb_detail" class="table table-hover table-borderless table-primary">
+            <tbody>
+                <tr>
+                    <td>
+                        <div id="txt_name" class="fw-bold">ชื่อ-นามสกุล</div>
+                    </td>
+                    <td>
+                        <label id="lb_name" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_csn" class="fw-bold">CSN</div>
+                    </td>
+                    <td>
+                        <label id="lb_csn" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_idcard" class="fw-bold">ID No</div>
+                    </td>
+                    <td>
+                        <label id="lb_idcard" class="text-primary"></label>
+
+                    </td>
+                    <td>
+                        <div id="txt_appno" class="fw-bold">Application No.</div>
+                    </td>
+                    <td>
+                        <label id="lb_appno" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_cont" class="fw-bold">Cont No.</div>
+
+                    </td>
+                    <td>
+                        <label id="lb_cont" class="text-primary"></label>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="txt_status" class="fw-bold">Status</div>
+                    </td>
+                    <td>
+                        <label id="lb_status" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_vendor" class="fw-bold">Vendor</div>
+                    </td>
+                    <td colspan="3">
+                        <label id="lb_vendor" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_product" class="fw-bold">Product</div>
+                    </td>
+                    <td colspan="3">
+                        <label id="lb_product" class="text-primary"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="txt_appdate" class="fw-bold">Application Date</div>
+                    </td>
+                    <td>
+                        <label id="lb_appdate" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_approvedate" class="fw-bold">Approve Date</div>
+
+                    </td>
+                    <td colspan="3">
+                        <label id="lb_approvedate" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_apptype" class="fw-bold">App Type</div>
+                    </td>
+                    <td colspan="3">
+                        <label id="lb_apptype" class="text-primary"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="txt_keyin" class="fw-bold">Key-In Step 1 By</div>
+                    </td>
+                    <td>
+                        <label id="lb_keyin" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_intby" class="fw-bold">Int.Approve by</div>
+                    </td>
+                    <td colspan="3">
+                        <label id="lb_intby" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_kesby" class="fw-bold">Kes.Approve By</div>
+                    </td>
+                    <td colspan="3">
+                        <label id="lb_kesby" class="text-primary"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="txt_duty" class="fw-bold">Duty Stamp</div>
+                    </td>
+                    <td>
+                        <label id="lb_duty" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_1stdue" class="fw-bold">First Due Amt</div>
+                    </td>
+                    <td colspan="3">
+                        <label id="lb_1stdue" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_1stcust" class="fw-bold">First cust Due</div>
+                    </td>
+                    <td colspan="3">
+                        <label id="lb_1stcust" class="text-primary"></label>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <div id="txt_purchase" class="fw-bold">Purchase Amt</div>
+                    </td>
+                    <td>
+                        <label id="lb_purchase" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_down" class="fw-bold">Down Amt</div>
+
+                    </td>
+                    <td colspan="3">
+                        <label id="lb_down" class="text-primary"></label>
+                    </td>
+                    <td>
+                        <div id="txt_principle" class="fw-bold">Principle Bal.</div>
+                    </td>
+                    <td colspan="3">
+                        <label id="lb_principle" class="text-primary"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="txt_received" class="fw-bold">Received Type</div>
+                    </td>
+                    <td colspan="9">
+                        <label id="lb_received" class="text-primary"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="9">
+                    </td>
+                    <td>
+                        <button id="btn_sign" type="button" class="btn btn-block btn-primary disabled" data-toggle="modal" data-target="#confirmModal">Sign Contract</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-body">
+        <Label id="lb_termrate" class="fw-bold fs-4 text-primary text-decoration-underline"> Description term and rate</Label>
+
+        <table id="tb_termrate" class="table table-hover table-bordered table-striped text-center" style="visibility:hidden;">
+            <thead>
+                <tr class="table-info">
+                    <th>From Term</th>
+                    <th>To Term</th>
+                    <th>Int%</th>
+                    <th>Int Amount</th>
+                    <th>Cru%</th>
+                    <th>Cru Amonth</th>
+                    <th>Init. Free</th>
+                    <th>Total Amonth</th>
+                    <th>Oth</th>
+                    <th>INSTALL</th>
+                    <th>CREDIT BUREAU</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <Label id="lb_installment" class="fw-bold fs-4 text-primary text-decoration-underline">Description Installment</Label>
+
+        <table id="tb_installment" class="table table-hover table-bordered table-striped text-center" style="visibility:hidden;">
+            <thead>
+                <tr class="table-info">
+                    <th>Term</th>
+                    <th>Begin</th>
+                    <th>Principal</th>
+                    <th>Installment</th>
+                    <th>Interest</th>
+                    <th>Cr. Usage</th>
+                    <th>INIT. FEE</th>
+                    <th>Pay Principal</th>
+                    <th>New Principal</th>
+                    <th>Income</th>
+                    <th>Closing Date</th>
+                    <th>Closing rebate</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--<h5 class="modal-title" id="confirmModalLabel">ยืนยันการลบ</h5>-->
+                <!-- ปุ่มปิด Modal -->
+                <span data-dismiss="modal" aria-label="Close" id="btn-close" class="btn-close ms-auto" aria-hidden="true" style="cursor: pointer;"></span>
+            </div>
+            <div class="modal-body">
+                <p id="txt_modal"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btn-cancel" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" id="btn-confirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="alertMsgModal" tabindex="-1" role="dialog" aria-labelledby="alertMsgModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="alertMsgModalLabel"></h5>
+                <span data-dismiss="modal" aria-label="Close" id="btn-close-Msg" class="btn-close ms-auto" aria-hidden="true" style="cursor: pointer;"></span>
+            </div>
+            <div class="modal-body">
+                <p id="txt_MsgModal"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    var dtResult = null;
+
+    $(document).ready(() => {
+        setDataTable();
+    })
+
+    function setDataTable() {
+        dtResult = $('#tb_result').DataTable({
+            "responsive": false,
+            "lengthChange": true,
+            "deferRender": true,
+            "retrieve": false,
+            "paging": false,
+            "searching": false,
+            "ordering": false,
+            "info": false,
+            "language": {
+                "emptyTable": "Data not found"
+            },
+            "columnDefs": [
+                {
+                    "targets": [0,1,2,3,4],
+                    "className": "text-center",
+                    "render": function (data, type, row, meta) {
+                        return data;
+                    }
+                }
+            ]
+
+        });
+        //$('#taSummaryReport td').css('white-space', 'initial');
+
+    }
+    function searchData(){
+
+        var vendor = $('#sl_vendor').val();
+            // ส่งคำค้นหาผ่าน AJAX
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("SearchData", "MonitorCaseUnsign")',
+                data: JSON.stringify({ vendor: vendor }),
+                cache: false,
+                contentType: "application/json;",
+                processData: false,
+                success: function (result) {
+                    if (result.data == null) {
+
+                    //StopHide_loading()
+                    //alert("Please contacting helpdesk because the system error.");
+                    return
+                    }
+                    if (result.data.length == 0) {
+
+                    //StopHide_loading()
+                    //alertFail('Summary closing report', 'Data not found.')
+                    return
+                    }
+
+                    RenderDataTableSearch(result.data)
+                    //StopHide_loading()
+                },
+                async: true
+            });
+    }
+    function RenderDataTableSearch(result) {
+
+        dtResult.rows().remove();
+        dtResult.clear();
+        dtResult.draw(false);
+        if (result.length > 0) {
+            for (var i = 0; i < result.length; i++) {
+                 let btn = `<button class="btn btn-link btn-view fw-bold" data-index="${i}">Select</button>`;
+                 // เพิ่ม row ใน DataTable
+                let row = dtResult.row.add([
+                    btn,
+                    result[i].contractNo,
+                    result[i].appDate,
+                    result[i].customerName,
+                    LocaleString(result[i].cntAmount)
+                ]);
+
+                // แนบข้อมูลเต็มของแถวใน DataTable โดยใช้ row().data()
+                let rowData = row.data();
+                rowData.full = result[i];  // เพิ่มข้อมูลเต็มของแถว
+                row.data(rowData);  // อัปเดตข้อมูลของแถวใน DataTable
+            }
+
+            dtResult.draw(false);
+            $('#tb_result').css('display', 'table');  // แสดง
+        }
+    }
+
+    // การคลิกปุ่มและดึงข้อมูล
+    $('#tb_result tbody').on('click', '.btn-view', function () {
+        var tr = $(this).closest('tr');            // ดึงข้อมูลจาก DataTable
+        let row = dtResult.row(tr);                // ดึงข้อมูลของแถว
+        let fullData = row.data().full;            // เข้าถึงข้อมูลที่แนบไว้ใน `full`
+        console.log(fullData);
+        $('#lb_name').text(fullData.customerName);
+        $('#lb_csn').text(fullData.cisNumber);
+        $('#lb_idcard').text(fullData.idCard);
+        $('#lb_appno').text(fullData.appNo);
+        $('#lb_cont').text(fullData.contractNo);
+        if(fullData.p1LOCA == 250)
+            $('#lb_status').text('UNSIGNED');
+        $('#lb_vendor').text(fullData.vendorCode + ':' + fullData.vendorName);
+        $('#lb_product').text(fullData.productName);
+        $('#lb_appdate').text(fullData.contractDate);
+        $('#lb_approvedate').text(fullData.appDate);
+        if (fullData.applicationType.trim() == "01")
+        {
+            $('#lb_apptype').text('01 : สมัครแบบปกติ');
+        }else if (fullData.applicationType.trim() == "02")
+        {
+            $('#lb_apptype').text('02 : สมัครโดยใช้บัตร Easy buy');
+        }
+        $('#lb_keyin').text(fullData.keyINBy);
+        $('#lb_intby').text(fullData.intBy);
+        $('#lb_kesby').text(fullData.kesBy);
+        $('#lb_duty').text(LocaleString(fullData.duty));
+        $('#lb_1stdue').text(LocaleString(fullData.firstDueAmt));
+        $('#lb_1stcust').text(fullData.firstCustDue);
+        $('#lb_purchase').text(LocaleString(fullData.purchaseAmt));
+        $('#lb_down').text(LocaleString(fullData.downAmt));
+        $('#lb_principle').text(LocaleString(fullData.principle));
+        $('#lb_received').text(fullData.received);
+        $('#tb_termrate').css('visibility', 'visible');  // แสดง
+        $('#tb_installment').css('visibility', 'visible');  // แสดง
+        $('#btn_sign').removeClass('disabled');
+    });
+    function LocaleString(numer)
+    {
+        var strresult = parseFloat(numer).toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }).toString()
+        return strresult;
+    }
+
+    $('#btn_sign').click(function() {
+      $('#txt_modal').text('Do you want to Patch Status ?')
+      $('#confirmModal').modal('show');
+    });
+
+    $('#btn-close, #btn-cancel').click(function() {
+        $('#confirmModal').modal('hide');
+    });
+
+    $('#btn-confirm').click(function() {
+      $('#confirmModal').modal('hide');
+      $('#alertMsgModal').modal('show');
+    });
+
+    $('#btn-confirm').click(function() {
+        $('#alertMsgModalLabel').text('Auto Sign Lay-Bill completed.')
+        $('#txt_MsgModal').html('[contract No.: 4722001105047250] <br> [App No.: 1490014333]');
+    });
+     $('#btn-close-Msg, #btn-cancel').click(function() {
+        $('#alertMsgModal').modal('hide');
+    });
+    
+</script>
+
+

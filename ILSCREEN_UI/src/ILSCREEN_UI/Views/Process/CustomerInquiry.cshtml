@@ -1,0 +1,559 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Customer Inquiry";
+    ViewData["Controller"] = ViewContext.RouteData.Values["controller"]?.ToString();
+}
+
+<style>
+    span.input-group-text {
+        border-radius: 0.375rem 0 0 0.375rem !important;
+        color: #fff;
+        background-color: #f124ab;
+    }
+</style>
+
+<!--begin::Row-->
+<div class="row">
+    <div class="col-sm-6"><h3 class="mb-0">@ViewData["Title"]</h3></div>
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-end">
+            @* <li class="breadcrumb-item"><a href="#">@ViewData["ControllerName"]</a></li> *@
+            <li class="breadcrumb-item"><a href="@("../" + ViewData["Controller"])">@ViewData["Controller"]</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+        </ol>
+    </div>
+
+
+</div>
+<!--end::Row-->
+<!--begin::Row-->
+<div class="row g-4">
+    <!--begin::Col-->
+    <div class="col-12">
+        <!--begin::Quick Example-->
+        <div class="card card-secondary card-outline mb-4">
+            <!--begin::Header-->
+            <div class="card-header"><div class="card-title">Customer Inquiry</div></div>
+            <!--end::Header-->
+            <!--begin::Form-->
+            <form>
+                <!--begin::Body-->
+                <div class="card-body">
+                    <div class="form-group row mb-3">
+                        <label for="SelectBranch" class="col-md-2 col-form-label form-label">Branch : </label>
+                        <div class="col-md-3">
+                            <select id="SelectBranch" class="form-control form-select">
+                                <option>option 1</option>
+                                <option>option 2</option>
+                                <option>option 3</option>
+                                <option>option 4</option>
+                                <option>option 5</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label for="SeachBy" class="col-md-2 col-form-label form-label">Search by : </label>
+                        <div class="col-md-3">
+                            <select id="SeachBy" class="form-control form-select">
+                                <option>ID No</option>
+                                <option>Customer No</option>
+                                <option>Contract No</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="email" id="exampleInputEmail1" aria-describedby="emailHelp" class="form-control" />
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                            <button type="submit" class="btn btn-primary">Clear</button>
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <table id="tb_CustomerInquiry" class="table table-bordered table-striped table-hover text-center">
+                        <thead>
+                            <tr class="table-info">
+                                <th scope="col">Select</th>
+                                <th scope="col">ID No.</th>
+                                <th scope="col">Name-Surname</th>
+                                <th scope="col">CSN</th>
+                                <th scope="col">Application Date</th>
+                                <th scope="col">Application Type</th>
+                                <th scope="col">Application No</th>
+                                <th scope="col">Branch</th>
+                                <th scope="col">Contract No</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"><a href="#">Select</a></th>
+                                <td>123456765434</td>
+                                <td>นางสาว น้ำอ้อย หวานเจี๊ยบ</td>
+                                <td>66115448</td>
+                                <td>21/09/2556</td>
+                                <td>01</td>
+                                <td>1</td>
+                                <td>1660001987</td>
+                                <td>4722001140449730</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <br />
+                    <table class="table table-borderless table-primary table-hover">
+                        <tbody>
+                            <tr>
+                                <th scope="row">ชื่อ-นามสกุล</th>
+                                <td class="text-primary">123456765434</td>
+                                <th scope="row">CSN</th>
+                                <td class="text-primary">66115448</td>
+                                <th scope="row">ID No.</th>
+                                <td class="text-primary">2756636587938</td>
+                                <th scope="row">Application No.</th>
+                                <td class="text-primary">1660001987</td>
+                                <th scope="row">Cont No.</th>
+                                <td class="text-primary">4722001140449730</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Status</th>
+                                <td class="text-primary">Sign Lay Bill</td>
+                                <th scope="row">Vender</th>
+                                <td class="text-primary">บริษัท เพาเวอร์บาย2 จำกัด</td>
+                                <td></td>
+                                <td></td>
+                                <th scope="row">Product</th>
+                                <td class="text-primary">TELEVISION SAMSUNG CS-34A1155 ***</td>
+                                <td></td>
+                                <td></td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row">Application Date</th>
+                                <td class="text-primary">21/09/2566</td>
+                                <th scope="row">Approve Date</th>
+                                <td class="text-primary">66115448</td>
+                                <td></td>
+                                <td></td>
+                                <th scope="row">App Type</th>
+                                <td class="text-primary">1660001987</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Key-In Step1 by</th>
+                                <td class="text-primary">P2606009</td>
+                                <th scope="row">Int.Approve by</th>
+                                <td class="text-primary">P2606009</td>
+                                <td></td>
+                                <td></td>
+                                <th scope="row">Kes.Approve by</th>
+                                <td class="text-primary">P3803010</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Dulty Stamp</th>
+                                <td class="text-primary">4.00</td>
+                                <th scope="row">First Due Amt</th>
+                                <td class="text-primary">755.00</td>
+                                <td></td>
+                                <td></td>
+                                <th scope="row">First cust Due</th>
+                                <td class="text-primary">02/11/2556</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Purchase Amt</th>
+                                <td class="text-primary">15,000</td>
+                                <th scope="row">Down Amt</th>
+                                <td class="text-primary">7,000.00</td>
+                                <td></td>
+                                <td></td>
+                                <th scope="row">Pribciple Bal.</th>
+                                <td class="text-primary">8,000.00</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Received Type</th>
+                                <td class="text-primary">2 : BILL PAY</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="card-body">
+                        <Label id="lb_termrate" class="fw-bold fs-4 text-primary text-decoration-underline"> Description term and rate</Label>
+                        <table id="tb_DescriptionTermAndRate" class="table table-bordered table-striped table-hover text-center">
+                            <thead>
+                                <tr class="table-info">
+                                    <th scope="col">From Term</th>
+                                    <th scope="col">To Term</th>
+                                    <th scope="col">Int%</th>
+                                    <th scope="col">INT%(EIR/YEAR)</th>
+                                    <th scope="col">CRU%</th>
+                                    <th scope="col">CRU%(EIR/YEAR)</th>
+                                    <th scope="col">Init.Fee</th>
+                                    <th scope="col">Total Amount</th>
+                                    <th scope="col">Oth</th>
+                                    <th scope="col">INSTALL</th>
+                                    <th scope="col">CREDIT BUREAU</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>12</td>
+                                    <td>00.68</td>
+                                    <td>14.64</td>
+                                    <td>00.37</td>
+                                    <td>7.92</td>
+                                    <td>0.00</td>
+                                    <td>8,000.00</td>
+                                    <td>0.00</td>
+                                    <td>751.00</td>
+                                    <td>12.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        <Label id="lb_installment" class="fw-bold fs-4 text-primary text-decoration-underline">Description Installment</Label>
+                        <table id="tb_DescriptionInstallment" class="table table-bordered table-striped table-hover text-center">
+                            <thead>
+                                <tr class="table-info">
+                                    <th scope="col">Term</th>
+                                    <th scope="col">Begin</th>
+                                    <th scope="col">Principal</th>
+                                    <th scope="col">Installment</th>
+                                    <th scope="col">Interest</th>
+                                    <th scope="col">Cr. Usage</th>
+                                    <th scope="col">INIT.FEE</th>
+                                    <th scope="col">Pay Principal</th>
+                                    <th scope="col">New Principal</th>
+                                    <th scope="col">Income</th>
+                                    <th scope="col">Closing Date</th>
+                                    <th scope="col">Closing rebate</th>
+                                    <th scope="col">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>21/09/2556</td>
+                                    <td>8,000.00</td>
+                                    <td>755.00</td>
+                                    <td>134.76</td>
+                                    <td>72.90</td>
+                                    <td>0.00</td>
+                                    <td>543.34</td>
+                                    <td>7,456.66</td>
+                                    <td>211.66</td>
+                                    <td>01/12/2566</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--end::Body-->
+                <!--begin::Footer-->
+                @* <div class="card-footer text-center">
+                    <h2>Thank You.</h2>
+                </div> *@
+                <!--end::Footer-->
+            </form>
+            <!--end::Form-->
+        </div>
+        <!--end::Quick Example-->
+    </div>
+    <!--end::Col-->
+</div>
+<!--end::Row-->
+
+
+<script>
+    function initial(){
+
+        let tbData_CustomerInquiry = $('#tb_CustomerInquiry');
+        let tbData_DescriptionTermAndRate = $('#tb_DescriptionTermAndRate');
+        let tbData_DescriptionInstallment = $('#tb_DescriptionInstallment');
+
+        tbData_CustomerInquiry.DataTable({
+            "lengthChange": true,
+            responsive: true,
+            "pageLength": 20,
+            scrollX: true,
+            columns: [
+                {
+                    title: 'Select',
+                    width: '10%',
+                    targets: 0,
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                    render: (data, type, row, meta) => {
+                        // return meta.row + 1;
+                        return '<a href=' + meta.row + '>Select<a/>';
+                    }
+                },
+                {
+                    type: 'string',
+                    data: 'idNo',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'name',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'csn',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'applicationDate',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'applicationType',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'applicationNo',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'branch',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'contractNo',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+            ]
+        });
+
+        tbData_DescriptionTermAndRate.DataTable({
+            "lengthChange": true,
+            responsive: true,
+            "pageLength": 20,
+            scrollX: true,
+            columns: [
+                {
+                    type: 'string',
+                    data: 'fromTerm',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'toTerm',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'int',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'intEirYear',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'cru',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'cruEirYear',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'initFree',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'totalAmount',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'oth',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'install',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'creditBureau',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                }
+            ]
+        });
+
+        tbData_DescriptionInstallment.DataTable({
+            "lengthChange": true,
+            responsive: true,
+            "pageLength": 20,
+            scrollX: true,
+            columns: [
+                {
+                    type: 'string',
+                    data: 'term',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'name',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'principal',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'installment',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'interest',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'crUsage',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'initFee',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'payPrincipal',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'newPrincipal',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'income',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'closingDate',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'closingRebate',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+                {
+                    type: 'string',
+                    data: 'amount',
+                    orderable: true,
+                    searchable: false,
+                    className: 'dt-body-center dt-head-center',
+                },
+            ]
+        });
+    }
+
+    $(document).ready(function () {
+        initial();
+    });
+</script>

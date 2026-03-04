@@ -1,0 +1,167 @@
+pipeline {
+    agent { label "build-eks-netcore-7-dev" } 
+    environment{ 
+        sonarqubeURL="http://172.22.193.24:9000/sonar"
+        nexusURL="172.22.193.207:8123"
+        ecrURL="423723743579.dkr.ecr.ap-southeast-1.amazonaws.com"
+        newVersion="1.0.0-${env.BUILD_NUMBER}-${env.BRANCH_NAME}"
+		
+        appName="ilscreen-ui"
+        appPath="ILSCREEN_UI"
+		appPort="5000"
+        service="frontend"
+        product="ilscreen_system"
+		
+		replicaset="1"
+		cpu="100m"
+		memory="300Mi"
+        nameSpace="dev-internalapp-02"
+        host="ilscreen.dev.com"
+    }
+    
+    stages {
+        stage ('Initialize') {
+            agent { 
+                label "build-eks-netcore-7-dev" 
+            }
+            steps {
+                sh "hostname"
+                sh "df"
+                sh "kubectl get nodes"
+                sh "docker ps"
+                sh "docker image ls"
+                sh '''
+                    echo "PATH = ${PATH}"
+                    cd src/${appPath}
+                    echo ${appName}
+                    echo ${newVersion}
+                '''
+            }
+        }
+
+        stage ('Restore Package') {
+            agent { 
+                label "build-eks-netcore-7-dev" 
+            }
+            steps {
+                sh "cat /home/jenkins/nugetConfig/Nuget.Config"
+                sh '''
+                    dotnet nuget locals http-cache --clear
+                    dotnet restore --configfile /home/jenkins/nugetConfig/Nuget.Config
+                '''
+            }
+        }
+
+         stage ('Run Sonarqube') {
+            agent { 
+                label "build-eks-netcore-7-dev" 
+            }
+            steps {
+				script {
+					try {
+						withSonarQubeEnv('ESBSonarqube') {
+							sh '''
+							echo "Build with Sonarqube"
+							echo "PATH = ${PATH}"
+							'''
+							sh '''
+								dotnet sonarscanner begin /k:"${appPath}" \
+								/d:sonar.host.url="${sonarqubeURL}" \
+								/d:sonar.cs.opencover.reportsPaths=tests/${appPath}.UnitTest/TestResults/opencovercoverage.xml \
+								/d:sonar.coverage.exclusions="**/Controllers/**,**/DataAccess/**,**/Filters/**,**/Models/**" \
+								/d:sonar.login="b80bdc92261d9a7057884572eaebadee8c3e2a82" \
+								/d:sonar.exclusions="**/Startup.cs, **/Program.cs, dbs/*, docs/*"
+
+								dotnet build
+								dotnet sonarscanner end /d:sonar.login="b80bdc92261d9a7057884572eaebadee8c3e2a82"
+							'''
+						}
+                    } catch (err) {
+                        echo err.getMessage()
+                    }
+				}
+            }
+        }
+
+        stage ('Build Image') {
+            agent { 
+                label "build-eks-netcore-7-dev" 
+            }
+            steps {
+                sh '''
+                    cd src/${appPath}
+                    dotnet publish -c Release -r linux-x64
+                    docker build -t ${appName}:${newVersion} -f Dockerfile .
+                '''
+            }
+        }
+
+        stage ('Push Image to Nexus') {
+            agent { 
+                label "build-eks-netcore-7-dev" 
+            }
+            steps {
+                sh '''
+                    docker tag ${appName}:${newVersion} ${nexusURL}/${appName}:${newVersion}
+                    docker push ${nexusURL}/${appName}:${newVersion}
+                    docker image remove ${appName}:${newVersion}
+                    docker image remove ${nexusURL}/${appName}:${newVersion}
+                '''
+            }
+        }
+
+		stage ('Deploy DEV') {
+            agent {
+                label "hwcnp-jenkins-dev"
+            }
+            environment {
+				dockerurl="${nexusURL}"
+                replicaset="${replicaset}"
+                aspnetcoreenvironment="Development"
+            }
+            steps {
+                sh '''
+                    cd src/${appPath}
+                    cp deployment.yaml deployment-${appName}-DEV.yaml
+                    sed -i s/#PRODUCT#/${product}/g deployment-${appName}-DEV.yaml
+					sed -i s/#SERVICETYPE#/${service}/g deployment-${appName}-DEV.yaml
+                    sed -i s/#APP_NAME#/${appName}/g deployment-${appName}-DEV.yaml
+                    sed -i s/#APP_VERSION#/${newVersion}/g deployment-${appName}-DEV.yaml
+                    sed -i s/#NAMESPACE#/${nameSpace}/g deployment-${appName}-DEV.yaml
+                    sed -i s/#HOST#/${host}/g deployment-${appName}-DEV.yaml
+                    sed -i s/#DOCKERURL#/${dockerurl}/g deployment-${appName}-DEV.yaml
+                    sed -i s/#REPLICASET#/${replicaset}/g deployment-${appName}-DEV.yaml
+                    sed -i s/#ASPNETCORE_ENVIRONMENT#/${aspnetcoreenvironment}/g deployment-${appName}-DEV.yaml
+					sed -i s/#MEMORY#/${memory}/g deployment-${appName}-DEV.yaml
+					sed -i s/#CPU#/${cpu}/g deployment-${appName}-DEV.yaml
+					sed -i s/#PORT#/${appPort}/g deployment-${appName}-DEV.yaml
+                    sed -i s/#TIER#/${service}/g deployment-${appName}-DEV.yaml
+                    sed -i s/#DOCKERNAMESPACE#/${nameSpace}/g deployment-${appName}-DEV.yaml
+					
+                    cat deployment-${appName}-DEV.yaml
+                    kubectl apply -f deployment-${appName}-DEV.yaml
+                '''
+            }
+        }
+
+        stage ('Cleanup') {
+            agent { 
+                label "hwcnp-jenkins-dev" 
+            }
+            steps {
+                deleteDir()
+            }
+        }
+		
+		stage ('Deploy Success') {
+            agent { 
+                label "hwcnp-jenkins-dev" 
+            }
+            steps {
+                sh '''
+                    echo ${newVersion}
+                '''
+            }
+        }
+    }
+}

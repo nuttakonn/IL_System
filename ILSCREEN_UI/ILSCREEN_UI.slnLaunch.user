@@ -1,0 +1,22 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "src\\ILSCREEN_UI\\ILSCREEN_UI.csproj",
+        "Action": "Start",
+        "DebugTarget": "IIS Express"
+      },
+      {
+        "Path": "..\\ILSCREEN_BIZ_API\\src\\ILSCREEN_BIZ_API\\ILSCREEN_BIZ_API.csproj",
+        "Action": "Start",
+        "DebugTarget": "IIS Express"
+      },
+      {
+        "Path": "..\\ILSCREEN_MSSQL_API\\src\\ILSCREEN_MSSQL_API\\ILSCREEN_MSSQL_API.csproj",
+        "Action": "Start",
+        "DebugTarget": "IIS Express"
+      }
+    ]
+  }
+]

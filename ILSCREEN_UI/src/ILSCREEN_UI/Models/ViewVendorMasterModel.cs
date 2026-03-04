@@ -1,0 +1,73 @@
+﻿namespace ILSCREEN_UI.Models
+{
+    public class ViewVendorMasterModel
+    {
+        public string? vendorID { get; set; }
+        public string? titleCode { get; set; }
+        public string? titleName { get; set; }
+        public string? vendorTName { get; set; }
+        public string? vendorEName { get; set; }
+        public string? addressNo1 { get; set; }
+        public string? buildName1 { get; set; }
+        public string? floor1 { get; set; }
+        public string? soi1 { get; set; }
+        public string? road1 { get; set; }
+        public string? moo1 { get; set; }
+        public string? tambol1 { get; set; }
+        public string? amphur1 { get; set; }
+        public string? province1 { get; set; }
+        public string? postCode1 { get; set; }
+        public string? addressNo2 { get; set; }
+        public string? buildName2 { get; set; }
+        public string? floor2 { get; set; }
+        public string? soi2 { get; set; }
+        public string? road2 { get; set; }
+        public string? moo2 { get; set; }
+        public string? tambol2 { get; set; }
+        public string? amphur2 { get; set; }
+        public string? province2 { get; set; }
+        public string? postCode2 { get; set; }
+        public string? addTax1 { get; set; }
+        public string? addTax { get; set; }
+        public string? regisTax { get; set; }
+        public string? taxID { get; set; }
+        public string? vatRate { get; set; }
+        public string? telNo1 { get; set; }
+        public decimal faxNo1 { get; set; }
+        public string? faxNoType1 { get; set; }
+        public string? telNo2 { get; set; }
+        public decimal faxNo2 { get; set; }
+        public string? faxNoType2 { get; set; }
+        public Int64 firstJoin { get; set; }
+        public Int64 joinDate { get; set; }
+        public Int64 expireDate { get; set; }
+        public Int64 mouDate { get; set; }
+        public Int64? payToVendor { get; set; }
+        public string? branch { get; set; }
+        public string? payType { get; set; }
+        public Int64 creditDay { get; set; }
+        public string? calendar { get; set; }
+        public string? delivery { get; set; }
+        public string? headOffice { get; set; }
+        public string? bankCode { get; set; }
+        public string? completeDoc { get; set; }
+        public string? accountCode { get; set; }
+        public string? bankRegion { get; set; }
+        public string? mkCode { get; set; }
+        public string? timeAvailable { get; set; }
+        public string? taxRefName { get; set; }
+        public string? payName { get; set; }
+        public string? commissionType { get; set; }
+        public Int64 commissionPay { get; set; }
+        public string? rank { get; set; }
+        public string? percent { get; set; }
+        public string? paymentType { get; set; }
+        public Int64? brn { get; set; }
+        public Int64? oldVendor { get; set; }
+        public string? hqVendor { get; set; }
+        public string? vendorType { get; set; }
+        public string? vendorDate { get; set; }
+        public string? userUpdate { get; set; }
+        public string? updateDate { get; set; }
+    }
+}
